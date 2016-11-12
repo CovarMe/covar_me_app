@@ -28,6 +28,11 @@ Bower(app)
 connect(host='mongodb://' + os.environ.get('MONGO_HOST') + '/' + os.environ.get('MONGO_DBNAME'))
 
 @app.route('/')
-
 def home_page():
     return render_template('index.html',name = random.choice(names))
+
+@app.route('/portfolio/<username>-<portfolio_id>')
+def show_portfolio(username, portfolio_id):
+    # show the given portfolio
+    print 'User %s' % username
+    return 'Portfolio %s' % portfolio_id
