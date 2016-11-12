@@ -1,0 +1,7 @@
+{
+  "name": "flask-grunt",
+  "version": "0.0.1",
+  "dependencies": {
+    "plotly": null
+  }
+}

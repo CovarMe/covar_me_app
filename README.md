@@ -3,6 +3,7 @@
 ### Generics
 ```
 npm i -g bower
+bower install
 ```
 
 ### MongoDB (Database)
