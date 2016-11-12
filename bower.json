@@ -2,6 +2,7 @@
   "name": "flask-grunt",
   "version": "0.0.1",
   "dependencies": {
-    "plotly": null
+    "plotly": null,
+    "tuktuk": "^1.0.0"
   }
 }

@@ -1,15 +1,14 @@
 <!doctype html>
-<title>Flaskr</title>
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<title>Covar Me! - {% block title %}{% endblock %}</title>
+
+<link rel=stylesheet type=text/css href="{{ url_for('bower.static', filename='tuktuk/tuktuk.css') }}">
+<link rel=stylesheet type=text/css href="{{ url_for('bower.static', filename='tuktuk/tuktuk.grid.css') }}">
+<link rel=stylesheet type=text/css href="{{ url_for('bower.static', filename='tuktuk/tuktuk.icons.css') }}">
+<link rel=stylesheet type=text/css href="{{ url_for('bower.static', filename='tuktuk/tuktuk.theme.default.css') }}">
+<script src="{{ url_for('bower.static', filename='plotly/plotly.js') }}"></script>
+<script src="{{ url_for('bower.static', filename='tuktuk/tuktuk.js') }}"></script>
+
 <div class=page>
-  <h1>Flaskr</h1>
-  <div class=metanav>
-    {% if not session.logged_in %}
-    <a href="{{ url_for('login') }}">log in</a>
-    {% else %}
-    <a href="{{ url_for('logout') }}">log out</a>
-    {% endif %}
-  </div>
   {% for message in get_flashed_messages() %}
   <div class=flash>{{ message }}</div>
   {% endfor %}
