@@ -6,7 +6,37 @@
 <link rel=stylesheet type=text/css href="{{ url_for('bower.static', filename='tuktuk/tuktuk.icons.css') }}">
 <link rel=stylesheet type=text/css href="{{ url_for('bower.static', filename='tuktuk/tuktuk.theme.default.css') }}">
 <script src="{{ url_for('bower.static', filename='plotly/plotly.js') }}"></script>
+
+<!-- ========================== HEADER ========================== -->
+<header class="bck margin-top margin-bottom">
+  <div class="row">
+    <div class="column_6">
+      <img src="http://emojis.slackmojis.com/emojis/images/1471119456/982/fiesta_parrot.gif?1471119456" class="logo on-left"/>
+      <h2><strong>&nbsp;&nbsp;Covar</strong>Me</h1>
+    </div>
+    <nav class="column_6 text right">
+      <a href="/login" class="button"><span class="icon user"></span>Login</a>
+      <a href="/register" class="button bck theme"><span class="icon pencil"></span>Register</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ========================== MODALS ==========================
+<div id="modal" data-tuktuk="modal" class="column_5">
+  <header>
+    <h4 class="text book inline">Normal window</h4>
+    <button data-modal="close" class="transparent small on-right inline icon remove"></button>
+  </header>
+</div>
+
+<script src="{{ url_for('bower.static', filename='jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ url_for('bower.static', filename='tuktuk/tuktuk.js') }}"></script>
+<script>
+TukTuk.Modal.loading();
+setTimeout( TukTuk.Modal.hide, 1000);
+</script>
+-->
+
 
 <div class=page>
   {% for message in get_flashed_messages() %}

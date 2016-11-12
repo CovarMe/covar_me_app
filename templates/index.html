@@ -1,13 +1,18 @@
-<!doctype html>
-<script src="{{ url_for('bower.static', filename='plotly/plotly.js') }}"></script>
-<title>Hello from Flask</title>
-{% if name %}
-<h1>Hello {{ name }}!</h1>
-{% else %}
-<h1>Hello, World!</h1>
-{% endif %}
-<div id="chart-a" style="width:100%;height:550px;"></div>
-<script>
+{% extends "layout.html" %}
+{% block body %}
+<body>
+  <section class="bck white padding text center">
+    <div class="row padding-bottom">
+      <div class="column_10 offset_1">
+        <script src="{{ url_for('bower.static', filename='plotly/plotly.js') }}"></script>
+        <title>Hello from Flask</title>
+        {% if name %}
+        <h1>Hello {{ name }}!</h1>
+        {% else %}
+        <h1>Hello, World!</h1>
+        {% endif %}
+        <div id="chart-a" style="width:100%;height:550px;"></div>
+        <script>
 var data = [{
   type: 'candlestick',
   open: [33.0, 33.3, 33.5, 33.0, 34.1],
@@ -19,4 +24,18 @@ var data = [{
   ].map(function(d) { return new Date(d[0], d[1]-1, d[2]); })
 }]
 Plotly.newPlot('chart-a', data);
-</script>
+        </script>
+        </h4>
+      </div>
+    </div>
+    <section class="landing">
+      <div class="row text center">
+        <div class="column_10 offset_1">
+          <h2 class="text bold color theme">Lorem ipsum dolor sit amet</h2>
+          <h4 class="text book italic">Quam sunt quos minima consequatur</h4>
+          <a href="#" class="button large margin-top">Yes, please!</a>
+        </div>
+      </div>
+    </section>
+</body>
+{% endblock %}

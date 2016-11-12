@@ -18,4 +18,4 @@ def register_new_user():
             do_the_login()
         else:
             show_the_login_form()
-    return ""
+    return 404

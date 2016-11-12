@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "plotly": null,
-    "tuktuk": "^1.0.0"
+    "tuktuk": "^1.0.0",
+    "jquery": "^3.1.1"
   }
 }
