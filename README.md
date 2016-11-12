@@ -1,7 +1,10 @@
 ## Set up 
 
 ### Generics
+Note: Require _npm_ and _pip_
 ```
+source cvenv/bin/activate
+pip install -r Requirements.txt
 npm i -g bower
 bower install
 ```
