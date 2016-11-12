@@ -4,6 +4,7 @@ from os.path import join, dirname
 from dotenv import load_dotenv
 from flask import Flask
 from flask import render_template
+from flask_bower import Bower
 from mongoengine import connect
 
 # set up the data models defined for mongo
@@ -21,6 +22,8 @@ names = ["Donald","Yoda","LeBron James",
 
 # create a Flask application
 app = Flask(__name__)
+# inject bower (for front-end resource management)
+Bower(app)
 # connect to MongoDB
 connect(host='mongodb://' + os.environ.get('MONGO_HOST') + '/' + os.environ.get('MONGO_DBNAME'))
 
