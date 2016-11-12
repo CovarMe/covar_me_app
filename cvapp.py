@@ -16,4 +16,4 @@ mongo = PyMongo(app)
 def home_page():
     return render_template('index.html',name = random.choice(names))
 
-
+print(app)
