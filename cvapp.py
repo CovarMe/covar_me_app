@@ -37,7 +37,6 @@ def register():
         return 404
 
 @app.route('/portfolio/<username>-<portfolio_id>')
-def show_portfolio(username, portfolio_id):
+def portfolio(username, portfolio_id):
     # show the given portfolio
-    print 'User %s' % username
-    return 'Portfolio %s' % portfolio_id
+    return show_portfolio(username, portfolio_id)

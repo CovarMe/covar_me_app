@@ -11,19 +11,54 @@
         {% else %}
         <h1>Hello, World!</h1>
         {% endif %}
-        <div id="chart-a" style="width:100%;height:550px;"></div>
+        <div id="chart" style="width:100%;height:550px;"></div>
         <script>
-var data = [{
-  type: 'candlestick',
-  open: [33.0, 33.3, 33.5, 33.0, 34.1],
-  high: [33.1, 33.3, 33.6, 33.2, 34.8],
-  low: [32.7, 32.7, 32.8, 32.6, 32.8],
-  close: [33.0, 32.9, 33.3, 33.1, 33.1],
-  x: [
-    [2013,10,10] ,[2013,11,10], [2013,12,10], [2014,1,10], [2014,2,10]
-  ].map(function(d) { return new Date(d[0], d[1]-1, d[2]); })
-}]
-Plotly.newPlot('chart-a', data);
+var rawDataURL = 'https://raw.githubusercontent.com/plotly/datasets/master/2016-weather-data-seattle.csv';
+var xField = 'Date';
+var yField = 'Mean_TemperatureC';
+
+var selectorOptions = {
+  buttons: [{
+    step: 'month',
+    stepmode: 'backward',
+    count: 1,
+    label: '1m'
+  }, {
+    step: 'month',
+    stepmode: 'backward',
+    count: 6,
+    label: '6m'
+  }, {
+    step: 'year',
+    stepmode: 'todate',
+    count: 1,
+    label: 'YTD'
+  }, {
+    step: 'year',
+    stepmode: 'backward',
+    count: 1,
+    label: '1y'
+  }, {
+    step: 'all',
+  }],
+};
+
+Plotly.d3.csv(rawDataURL, function(err, rawData) {
+  if(err) throw err;
+
+  var layout = {
+    title: 'Time series with range slider and selectors',
+    xaxis: {
+      rangeselector: selectorOptions,
+      rangeslider: {}
+    },
+    yaxis: {
+      fixedrange: true
+    }
+  };
+
+  Plotly.plot('graph', data, layout);
+});
         </script>
         </h4>
       </div>
