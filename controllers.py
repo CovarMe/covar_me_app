@@ -12,9 +12,13 @@ def show_homepage():
                            name = random.choice(names))
 
 def show_portfolio(username, portfolio_id):
-    opentsdb_data = opentsdb_query()
+    opentsdb_res = opentsdb_query(
+        ['EGAS'],
+        ['price']
+    )
+
     chart_data = []
-    for metric in opentsdb_data:
+    for metric in opentsdb_res:
         chart_data.append(metric['dps'])
 
     return render_template(
