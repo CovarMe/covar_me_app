@@ -16,10 +16,13 @@ def show_portfolio(username, portfolio_id):
         ['EGAS'],
         ['price']
     )
+    if opentsdb_res['success']:
+        chart_data = []
+        for metric in opentsdb_res['data']:
+            chart_data.append(metric['dps'])
 
-    chart_data = []
-    for metric in opentsdb_res:
-        chart_data.append(metric['dps'])
+    else:
+        return "Couldn't retrieve portfolio data"
 
     return render_template(
         'portfolio.html', 

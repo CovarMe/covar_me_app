@@ -11,10 +11,7 @@ def opentsdb_query(companies, metrics):
         "aggregator": "sum",
         "metric": "EWST.price",
         "rate": "false",
-        "tags": {
-            "company":"EWST",
-            "metric":"price"
-        }
+        "tags": {}
     }
     queries = [query_template] * n
     for i, met in enumerate(metrics):
@@ -35,4 +32,4 @@ def opentsdb_query(companies, metrics):
     elif len(response_dict) == 0:
         return {'success': False, 'error': 'Empty response.'}
     else:
-        return {'success': True, 'response': response_dict}
+        return {'success': True, 'data': response_dict}
