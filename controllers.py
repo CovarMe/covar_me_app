@@ -29,6 +29,10 @@ def show_portfolio(username, portfolio_id):
         name = random.choice(names),
         chart_data = chart_data)
 
+def show_new_portfolio_form(username):
+    return render_template('new_portfolio.html',
+                           username = username)
+
 def show_registration_form():
     return render_template('registration.html')
 

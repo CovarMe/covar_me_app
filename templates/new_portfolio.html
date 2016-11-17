@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block title %}Create Portfolio{% endblock %}
+{% block body %}
+<h1>Create a new portfolio for {{ username }}</h1>
+<form id="form" name="form" class="margin-top">
+  <label>Label example</label>
+  <input type="text" name="default" id="default">
+  <!--
+    <label>Label example</label>
+    <input type="text" name="large" id="large" class="large" />
+  -->
+  <fieldset>
+    <label>Drop down:<small>Select option</small></label>
+    <span class="select">
+      <select>
+        <option value="1">HTML5 Jedi</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </span>
+  </fieldset>
+
+  <fieldset>
+    <label>Required:<small>field</small></label>
+    <input type="text" name="name" id="name" required="">
+  </fieldset>
+
+  <fieldset>
+    <label>Feedback:<small>Comments here</small></label>
+    <textarea></textarea>
+  </fieldset>
+
+  <fieldset>
+    <label>Switches<small>Touch lover</small></label>
+    <div data-control="checkbox">
+      <input type="checkbox" value="None" id="prueba">
+      <label for="prueba"></label>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <label>Radio<small>buttons</small></label>
+    <input type="radio" name="radio1"><span>Yes</span>
+    <input type="radio" name="radio2" disabled=""><span>No</span>
+  </fieldset>
+
+  <fieldset>
+    <label>Checkbox:<small>Styled</small></label>
+    <input type="checkbox" name="radio1"><span>One</span>
+    <input type="checkbox" name="radio2"><span>Two</span>
+  </fieldset>
+</form>
+{% endblock %}

@@ -36,6 +36,11 @@ def register():
     else: 
         return 404
 
+@app.route('/new-portfolio/<username>', methods=['GET', 'POST'])
+def new_portfolio(username):
+    # show the portfolio creation form
+    return show_new_portfolio_form(username)
+
 @app.route('/portfolio/<username>-<portfolio_id>')
 def portfolio(username, portfolio_id):
     # show the given portfolio
