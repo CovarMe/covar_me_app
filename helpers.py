@@ -9,7 +9,7 @@ opentsdb_url = "http://" \
 
 def get_ticker_list():
     tickers = [stock['ticker'] for stock in Stock.objects()]
-    return sorted(tickers)
+    return sorted(tickers)[1:100]
 
 
 def opentsdb_query(companies, metrics):

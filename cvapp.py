@@ -38,8 +38,15 @@ def register():
 
 @app.route('/new-portfolio/<username>', methods=['GET', 'POST'])
 def new_portfolio(username):
-    # show the portfolio creation form
-    return show_new_portfolio_form(username)
+    if request.method == 'POST':
+        create_new_portfolio(request.form['portfolio_name'],
+                             request.form['ticker_selection'])
+        return "Thanks"
+    elif request.method == 'GET':
+        # show the portfolio creation form
+        return show_new_portfolio_form(username)
+    else: 
+        return 404
 
 @app.route('/portfolio/<username>-<portfolio_id>')
 def portfolio(username, portfolio_id):

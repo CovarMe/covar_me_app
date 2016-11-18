@@ -39,6 +39,10 @@ def show_new_portfolio_form(username):
                            tickers = tickers)
 
 
+def create_new_portfolio(form):
+    return form
+
+
 def show_registration_form():
     return render_template('registration.html')
 
