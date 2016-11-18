@@ -33,9 +33,10 @@ def show_portfolio(username, portfolio_id):
 
 
 def show_new_portfolio_form(username):
+    tickers = get_ticker_list()
     return render_template('new_portfolio.html',
                            username = username,
-                           tickers = ['ABC','MSFT'])
+                           tickers = tickers)
 
 
 def show_registration_form():

@@ -2,7 +2,7 @@
 
 {% block imports %}
 <link rel=stylesheet type=text/css href="{{ url_for('bower.static', filename='select2/dist/css/select2.min.css') }}">
-<script src="{{ url_for('bower.static', filename='select2/dist/js/select2.full.min.js') }}"></script>
+<script src="{{ url_for('bower.static', filename='select2/dist/js/select2.min.js') }}"></script>
 {% endblock %}
 
 {% block title %}Create Portfolio{% endblock %}
@@ -18,15 +18,15 @@
           <label>Provide a Name for the new Portfolio</label>
           <input type="text" name="portfolio_name" id="large" />
 
-          <script type="text/javascript">
-$(".ticker-selection").select2();
-          </script>
-          <label>Provide a Name for the new Portfolio</label>
+          <label>Select your Stock Tickers</label>
           <select class="ticker-selection" name="ticker_selection" multiple="multiple">
             {% for ticker in tickers %}
             <option value="{{ ticker }}">{{ ticker }}</option>
             {% endfor %}
           </select>
+          <script type="text/javascript">
+$(".ticker-selection").select2();
+          </script>
 
           <div class="margin-top">
             <button type="submit" class="button success small"><span class="icon ok"></span>Create</a>

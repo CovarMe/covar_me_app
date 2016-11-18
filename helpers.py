@@ -1,9 +1,16 @@
 import os, requests, json, time, datetime
+from mongo_schemata import *
 
 opentsdb_url = "http://" \
         + os.environ.get("OPENTSDB_HOST") \
         + ":" + os.environ.get("OPENTSDB_PORT") \
         + "/api/"
+
+
+def get_ticker_list():
+    tickers = [stock['ticker'] for stock in Stock.objects()]
+    return sorted(tickers)
+
 
 def opentsdb_query(companies, metrics):
     n = len(companies) * len(metrics)
