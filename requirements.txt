@@ -2,3 +2,4 @@ flask
 flask-pymongo
 flask-bower
 python-dotenv
+numpy
