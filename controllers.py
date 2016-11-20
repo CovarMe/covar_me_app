@@ -14,22 +14,29 @@ def show_homepage():
 
 
 def show_portfolio(username, portfolio_id):
+    data = {}
     opentsdb_res = opentsdb_query(
         ['EGAS'],
         ['price']
     )
     if opentsdb_res['success']:
-        chart_data = []
+        data['ts'] = []
         for metric in opentsdb_res['data']:
-            chart_data.append(metric['dps'])
+            data['ts'].append(metric['dps'])
 
-    else:
-        return "Couldn't retrieve portfolio data"
+    data['ret_vs_var'] = [{
+          'x': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 
+          'y': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 
+          'line': {'color': "rgb(0,100,80)"}, 
+          'mode': "lines", 
+          'name': "Fair", 
+          'type': "scatter"
+    }]
 
     return render_template(
         'portfolio.html', 
         name = random.choice(names),
-        chart_data = chart_data)
+        data = data)
 
 
 def show_new_portfolio_form(username):
