@@ -1,3 +1,4 @@
+import math
 from flask import render_template
 from helpers import *
 
@@ -26,7 +27,7 @@ def show_portfolio(username, portfolio_id):
 
     data['ret_vs_var'] = [{
           'x': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 
-          'y': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 
+          'y': [math.log(i) for i in range(1,11)], 
           'line': {'color': "rgb(0,100,80)"}, 
           'mode': "lines", 
           'name': "Fair", 
