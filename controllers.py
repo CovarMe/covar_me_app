@@ -1,3 +1,4 @@
+import timeit
 import math
 from flask import render_template
 from helpers import *
@@ -62,3 +63,12 @@ def register_new_user():
         else:
             show_the_login_form()
             return 404
+
+def matrix_test():
+    # mat = np.eye(100, dtype = float)
+    start = time.clock()
+    # create_mongodb_covar_matrix(mat, range(100))
+    mat = read_mongodb_covar_matrix(range(25,45))
+    end = time.clock()
+    return str(end - start)
+    return mat 

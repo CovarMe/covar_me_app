@@ -52,3 +52,8 @@ def new_portfolio(username):
 def portfolio(username, portfolio_id):
     # show the given portfolio
     return show_portfolio(username, portfolio_id)
+
+@app.route('/test')
+def test():
+    return matrix_test()
+    

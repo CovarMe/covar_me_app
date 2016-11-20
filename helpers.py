@@ -47,12 +47,19 @@ def create_mongodb_covar_matrix(mat, names):
     it = np.nditer(mat, flags=['f_index','multi_index'])
     while not it.finished:
         if it.multi_index[0] <= it.multi_index[1]:
+            print('Create covariance cell: ' + str(it[0]))
             MatrixItem.objects(i = names[it.multi_index[0]],
                                j = names[it.multi_index[1]]
                               ).update_one(set__v = it[0], upsert = True)
 
         it.iternext()
 
-    return " ".join([(mi['i'] + mi['j'] + ": " + str(mi['v'])) for mi in MatrixItem.objects()])
+    return " ".join([(str(mi['i']) + str(mi['j']) + ": " + str(mi['v'])) for mi in MatrixItem.objects()])
 
+
+def read_mongodb_covar_matrix(names):
+    mis = MatrixItem.objects(i__in = names,
+                             j__in = names)
+    print(mis)
+    return " ".join([(str(mi['i']) + str(mi['j']) + ": " + str(mi['v'])) for mi in mis])
 
