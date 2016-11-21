@@ -13,6 +13,24 @@ def get_ticker_list(q = ''):
     return sorted(tickers)
 
 
+def check_user(username):
+    if User.objects(name = username).first() == None:
+        return False
+    else:
+        return True
+
+
+def create_portfolio(username, name, tickers):
+    u = User.objects(name = username).first()
+    s = Stock.objects(ticker__in = tickers)
+    p = Portfolio(name = name,
+                  stocks = s)
+    u.portfolios.append(p)
+    u.save()
+    p.save()
+    return p.id
+
+
 def opentsdb_query(companies, metrics):
     n = len(companies) * len(metrics)
     query_template = {
