@@ -54,3 +54,7 @@ Plotly.plot('graph', data, layout);
     </section>
 </body>
 {% endblock %}
+
+{% block bottom_imports %}
+<script src="{{ url_for('bower.static', filename='plotly/plotly.js') }}"></script>
+{% endblock %}

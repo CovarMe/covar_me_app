@@ -1,16 +1,16 @@
 <!doctype html>
-<title>Covar Me! - {% block title %}{% endblock %}</title>
-
-<link rel=stylesheet type=text/css href="{{ url_for('bower.static', filename='tuktuk/tuktuk.css') }}">
-<link rel=stylesheet type=text/css href="{{ url_for('bower.static', filename='tuktuk/tuktuk.grid.css') }}">
-<link rel=stylesheet type=text/css href="{{ url_for('bower.static', filename='tuktuk/tuktuk.icons.css') }}">
-<link rel=stylesheet type=text/css href="{{ url_for('bower.static', filename='tuktuk/tuktuk.theme.default.css') }}">
-<script src="{{ url_for('bower.static', filename='plotly/plotly.js') }}"></script>
-<script src="{{ url_for('bower.static', filename='jquery/dist/jquery.min.js') }}"></script>
-{% block imports %}{% endblock %}
-
 <!-- ========================== HEADER ========================== -->
 <header class="bck margin-top margin-bottom">
+
+  <title>Covar Me! - {% block title %}{% endblock %}</title>
+
+  <!-- All the javascript and css shit that gets loaded on the top -->
+  <link rel=stylesheet type=text/css href="{{ url_for('bower.static', filename='tuktuk/tuktuk.css') }}">
+  <link rel=stylesheet type=text/css href="{{ url_for('bower.static', filename='tuktuk/tuktuk.grid.css') }}">
+  <link rel=stylesheet type=text/css href="{{ url_for('bower.static', filename='tuktuk/tuktuk.icons.css') }}">
+  <link rel=stylesheet type=text/css href="{{ url_for('bower.static', filename='tuktuk/tuktuk.theme.default.css') }}">
+  {% block top_imports %}{% endblock %}
+
   <div class="row">
     <div class="column_6">
       <img src="http://emojis.slackmojis.com/emojis/images/1471119456/982/fiesta_parrot.gif?1471119456" class="logo on-left"/>
@@ -25,22 +25,6 @@
   </div>
 </header>
 
-<!-- ========================== MODALS ==========================
-<div id="modal" data-tuktuk="modal" class="column_5">
-  <header>
-    <h4 class="text book inline">Normal window</h4>
-    <button data-modal="close" class="transparent small on-right inline icon remove"></button>
-  </header>
-</div>
-
-<script src="{{ url_for('bower.static', filename='jquery/dist/jquery.min.js') }}"></script>
-<script src="{{ url_for('bower.static', filename='tuktuk/tuktuk.js') }}"></script>
-<script>
-TukTuk.Modal.loading();
-setTimeout( TukTuk.Modal.hide, 1000);
-</script>
--->
-
 
 <div class=page>
   {% for message in get_flashed_messages() %}
@@ -48,3 +32,7 @@ setTimeout( TukTuk.Modal.hide, 1000);
   {% endfor %}
   {% block body %}{% endblock %}
 </div>
+
+<!-- All the javascript and css shit that gets loaded on the bottom -->
+<script src="{{ url_for('bower.static', filename='jquery/dist/jquery.min.js') }}"></script>
+{% block bottom_imports %}{% endblock %}

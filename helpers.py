@@ -8,16 +8,15 @@ opentsdb_url = "http://" \
         + "/api/"
 
 
-def get_ticker_list():
-    tickers = [stock['ticker'] for stock in Stock.objects()]
-    return sorted(tickers)[1:100]
+def get_ticker_list(q = ''):
+    tickers = [stock['ticker'] for stock in Stock.objects(ticker__contains = q)]
+    return sorted(tickers)
 
 
 def opentsdb_query(companies, metrics):
     n = len(companies) * len(metrics)
     query_template = {
         "aggregator": "sum",
-        "metric": "EWST.price",
         "rate": "false",
         "tags": {}
     }
@@ -26,7 +25,7 @@ def opentsdb_query(companies, metrics):
         for j, com in enumerate(companies):
             queries[i + j]['metric'] = com + '.' + met
             queries[i + j]['rate'] = 'false'
-            queries[i + j]['tags'] = {'company': com}
+            queries[i + j]['tags'] = { 'company': com }
 
     request_data = {
         "start": "5y-ago",
