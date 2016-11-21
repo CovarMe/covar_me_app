@@ -1,8 +1,6 @@
 {% extends "layout.html" %}
 
-{% block imports %}
-<link rel=stylesheet type=text/css href="{{ url_for('bower.static', filename='select2/dist/css/select2.min.css') }}">
-<script src="{{ url_for('bower.static', filename='select2/dist/js/select2.min.js') }}"></script>
+{% block top_imports %}
 {% endblock %}
 
 {% block title %}Create Portfolio{% endblock %}
@@ -14,27 +12,39 @@
       <h1>Create a new portfolio for {{ username }}</h1>
       <form id="form" name="new-portfolio-form" action="/new-portfolio/{{ username }}" method='POST' class="margin-top">
         <div class="column_10 offset_1">
-
+          <br/>
+          <br/>
           <label>Provide a Name for the new Portfolio</label>
           <input type="text" name="portfolio_name" id="large" />
-
+          <br/>
+          <br/>
           <label>Select your Stock Tickers</label>
-          <select class="ticker-selection" name="ticker_selection" multiple="multiple">
-            {% for ticker in tickers %}
-            <option value="{{ ticker }}">{{ ticker }}</option>
-            {% endfor %}
-          </select>
-          <script type="text/javascript">
-$(".ticker-selection").select2();
-          </script>
-
-          <div class="margin-top">
-            <button type="submit" class="button success small"><span class="icon ok"></span>Create</a>
-          </div>
-
+          <input id="ticker-autocomplete" name="ticker_selection" type="text"/>
+          <hr/>
+          <button type="submit" class="button success"><span class="icon user"></span>Create Portfolio</button>
         </div>
       </form>
     </div>
   </section>
 </body>
 {% endblock %}
+
+{% block bottom_imports %}
+<script src="{{ url_for('bower.static', filename='devbridge-autocomplete/dist/jquery.autocomplete.min.js') }}"></script>
+<script>
+var tickers = [
+  {% for ticker in tickers %}
+  { data: "{{ ticker }}", value: "{{ ticker }}" },
+  {% endfor %}
+];
+$('#ticker-autocomplete').autocomplete({
+  lookup: tickers,
+  delimiter: ',',
+  lookupLimit: 50,
+  onSelect: function () {
+    this.value = this.value + ', ';
+  }
+});
+</script>
+{% endblock %}
+

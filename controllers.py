@@ -1,5 +1,7 @@
+import timeit
+import math
 from flask import render_template
-from helpers import *
+from db.helpers import *
 
 import random
 names = ["Donald","Yoda","LeBron James", 
@@ -13,6 +15,28 @@ def show_homepage():
                            name = random.choice(names))
 
 
+def show_registration_form():
+    return render_template('registration.html')
+
+
+def show_new_portfolio_form(username):
+    tickers = get_ticker_list()
+    return render_template('new_portfolio.html',
+                           username = username,
+                           tickers = tickers)
+
+
+def create_new_portfolio(username, name, tickers):
+    if not check_user(username):
+        return show_registration_form()
+    else:
+        portfolio_id = create_portfolio(username = username,
+                                        name = name,
+                                        tickers = tickers)
+        return show_portfolio(username, portfolio_id) 
+
+
+# TODO
 def show_portfolio(username, portfolio_id):
     data = {}
     opentsdb_res = opentsdb_query(
@@ -25,12 +49,12 @@ def show_portfolio(username, portfolio_id):
             data['ts'].append(metric['dps'])
 
     data['ret_vs_var'] = [{
-          'x': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 
-          'y': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 
-          'line': {'color': "rgb(0,100,80)"}, 
-          'mode': "lines", 
-          'name': "Fair", 
-          'type': "scatter"
+        'x': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 
+        'y': [math.log(i) for i in range(1,11)], 
+        'line': {'color': "rgb(0,100,80)"}, 
+        'mode': "lines", 
+        'name': "Fair", 
+        'type': "scatter"
     }]
 
     return render_template(
@@ -39,25 +63,12 @@ def show_portfolio(username, portfolio_id):
         data = data)
 
 
-def show_new_portfolio_form(username):
-    tickers = get_ticker_list()
-    return render_template('new_portfolio.html',
-                           username = username,
-                           tickers = tickers)
-
-
-def create_new_portfolio(form):
-    return form
-
-
-def show_registration_form():
-    return render_template('registration.html')
-
-
-def register_new_user():
-    def login():
-        if request.method == 'POST':
-            do_the_login()
-        else:
-            show_the_login_form()
-            return 404
+# TODO
+def matrix_test():
+    # mat = np.eye(100, dtype = float)
+    start = time.clock()
+    # create_mongodb_covar_matrix(mat, range(100))
+    mat = read_mongodb_covar_matrix(range(25,45))
+    end = time.clock()
+    return str(end - start)
+    return mat 

@@ -8,7 +8,7 @@ from flask_bower import Bower
 from mongoengine import connect
 
 # set up the data models defined for mongo
-from mongo_schemata import *
+from db.mongo_schemata import *
 
 # load environment variables from .env file
 dotenv_path = join(dirname(__file__), '.env')
@@ -39,8 +39,9 @@ def register():
 @app.route('/new-portfolio/<username>', methods=['GET', 'POST'])
 def new_portfolio(username):
     if request.method == 'POST':
-        create_new_portfolio(request.form['portfolio_name'],
-                             request.form['ticker_selection'])
+        create_new_portfolio(username = username,
+                             name = request.form['portfolio_name'],
+                             tickers = request.form['ticker_selection'])
         return "Thanks"
     elif request.method == 'GET':
         # show the portfolio creation form
@@ -52,3 +53,8 @@ def new_portfolio(username):
 def portfolio(username, portfolio_id):
     # show the given portfolio
     return show_portfolio(username, portfolio_id)
+
+@app.route('/test')
+def test():
+    return matrix_test()
+    

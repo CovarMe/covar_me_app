@@ -5,6 +5,9 @@
     "plotly": null,
     "tuktuk": "^1.0.0",
     "jquery": "^3.1.1",
-    "select2": "^4.0.3"
+    "devbridge-autocomplete": "https://github.com/devbridge/jQuery-Autocomplete.git#^1.2.27"
+  },
+  "resolutions": {
+    "jquery": "1.8.3"
   }
 }

@@ -37,7 +37,6 @@ var layout = {
     zeroline: false
   }
 };
-console.log(data)
 Plotly.plot('graph', data, layout);
         </script>
         </h4>
@@ -54,4 +53,8 @@ Plotly.plot('graph', data, layout);
       </div>
     </section>
 </body>
+{% endblock %}
+
+{% block bottom_imports %}
+<script src="{{ url_for('bower.static', filename='plotly/plotly.js') }}"></script>
 {% endblock %}
