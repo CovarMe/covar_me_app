@@ -56,9 +56,10 @@ def create_new_portfolio(username, name, tickers):
 
 # TODO
 def show_portfolio(username, portfolio_id):
+    p = get_portfolio(portfolio_id)
     data = {}
     opentsdb_res = opentsdb_query(
-        ['EGAS'],
+        [s['ticker'] for s in p.stocks],
         ['price']
     )
     if opentsdb_res['success']:

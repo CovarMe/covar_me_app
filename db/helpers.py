@@ -31,13 +31,17 @@ def create_user(name, email, password):
 
 def create_portfolio(username, name, tickers):
     u = User.objects(name = username).first()
-    s = Stock.objects(ticker__in = tickers)
+    s = Stock.objects(ticker__in = tickers.split(","))
     p = Portfolio(name = name,
                   stocks = s)
+    p.save()
     u.portfolios.append(p)
     u.save()
-    p.save()
     return p.id
+
+
+def get_portfolio(portfolio_id):
+    return Portfolio.objects(id = portfolio_id).first()
 
 
 def opentsdb_query(companies, metrics):
@@ -58,6 +62,7 @@ def opentsdb_query(companies, metrics):
         "start": "5y-ago",
         "queries": queries
     }
+    print(request_data)
     request_url = opentsdb_url + "query?summary=true&details=true"
     response = requests.post(request_url, data = json.dumps(request_data))
     response_dict = response.json()

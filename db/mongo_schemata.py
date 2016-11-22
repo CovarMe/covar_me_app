@@ -2,7 +2,7 @@ import datetime
 from mongoengine import *
 
 class Stock(Document):
-    ticker = StringField(required = True, max_length = 4)
+    ticker = StringField(required = True, max_length = 8)
 
 
 class Portfolio(Document):
