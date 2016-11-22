@@ -17,19 +17,29 @@
       <h2><strong>&nbsp;&nbsp;Covar</strong>Me</h1>
     </div>
     <!--
-    <nav class="column_6 text right">
+      <nav class="column_6 text right">
       <a href="/login" class="button"><span class="icon user"></span>Login</a>
       <a href="/register" class="button bck theme"><span class="icon pencil"></span>Register</a>
-    </nav>
+      </nav>
     -->
   </div>
 </header>
 
 
 <div class=page>
-  {% for message in get_flashed_messages() %}
-  <div class=flash>{{ message }}</div>
-  {% endfor %}
+  <section class="bck white padding text center">
+    <div class="row padding-bottom">
+      {% with messages = get_flashed_messages(with_categories = true) %}
+      {% if messages %}
+      <ul class=flashes>
+        {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
+    </div>
+  </section>
   {% block body %}{% endblock %}
 </div>
 

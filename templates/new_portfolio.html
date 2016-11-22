@@ -21,7 +21,7 @@
           <label>Select your Stock Tickers</label>
           <input id="ticker-autocomplete" name="ticker_selection" type="text"/>
           <hr/>
-          <button type="submit" class="button success"><span class="icon user"></span>Create Portfolio</button>
+          <button type="submit" class="button success"><span class="icon star"></span>Create Portfolio</button>
         </div>
       </form>
     </div>
@@ -33,9 +33,9 @@
 <script src="{{ url_for('bower.static', filename='devbridge-autocomplete/dist/jquery.autocomplete.min.js') }}"></script>
 <script>
 var tickers = [
-  {% for ticker in tickers %}
-  { data: "{{ ticker }}", value: "{{ ticker }}" },
-  {% endfor %}
+{% for ticker in tickers %}
+{ data: "{{ ticker }}", value: "{{ ticker }}" },
+{% endfor %}
 ];
 $('#ticker-autocomplete').autocomplete({
   lookup: tickers,

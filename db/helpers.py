@@ -20,6 +20,15 @@ def check_user(username):
         return True
 
 
+def create_user(name, email, password):
+    u = User(name = name,
+             email = email, 
+             password = password)
+    u.save()
+    print('creating')
+    return u
+
+
 def create_portfolio(username, name, tickers):
     u = User.objects(name = username).first()
     s = Stock.objects(ticker__in = tickers)

@@ -1,6 +1,6 @@
 import timeit
 import math
-from flask import render_template
+from flask import render_template, flash
 from db.helpers import *
 
 import random
@@ -19,6 +19,27 @@ def show_registration_form():
     return render_template('registration.html')
 
 
+def register_new_user(form):
+    errors = []
+    if check_user(form['name']):
+        errors.append('Username already exists, choose another name or log in.')
+
+    if form['password1'] != form['password2']:
+        errors.append("Passwords don't match.")
+
+    if len(errors) > 0:
+        for error in errors:
+            flash(error, 'error')
+
+        return show_registration_form()
+    else:
+        u = create_user(name = form['name'],
+                          email = form['email'],
+                          password = form['password1'])
+        flash('New user ' + u.name + ' created!')
+        return show_new_portfolio_form(u.name)
+
+
 def show_new_portfolio_form(username):
     tickers = get_ticker_list()
     return render_template('new_portfolio.html',
@@ -27,13 +48,10 @@ def show_new_portfolio_form(username):
 
 
 def create_new_portfolio(username, name, tickers):
-    if not check_user(username):
-        return show_registration_form()
-    else:
-        portfolio_id = create_portfolio(username = username,
-                                        name = name,
-                                        tickers = tickers)
-        return show_portfolio(username, portfolio_id) 
+    portfolio_id = create_portfolio(username = username,
+                                    name = name,
+                                    tickers = tickers)
+    return show_portfolio(username, portfolio_id) 
 
 
 # TODO
@@ -70,5 +88,5 @@ def matrix_test():
     # create_mongodb_covar_matrix(mat, range(100))
     mat = read_mongodb_covar_matrix(range(25,45))
     end = time.clock()
-    return str(end - start)
+    # return str(end - start)
     return mat 

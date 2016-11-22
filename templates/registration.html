@@ -1,5 +1,34 @@
 {% extends "layout.html" %}
 {% block title %}Registration{% endblock %}
 {% block body %}
-Teest
+<body>
+  <section class="bck white padding text center">
+    <div class="row padding-bottom">
+      <h1>Create a User Account</h1>
+      <p>An account with <strong>Covar</strong>Me enables you to choose one or more portfolios and track valuable risk insights.</p>
+      <form id="form" name="registration-form" action="/register" method='POST' class="margin-top">
+        <div class="column_10 offset_1">
+          <br/>
+          <br/>
+          <label>Enter your desired Username</label>
+          <input type="text" name="name" id="large"/>
+          <br/>
+          <br/>
+          <label>Enter your Email</label>
+          <input type="email" name="email"/>
+          <br/>
+          <br/>
+          <label>Enter your Password</label>
+          <input type="password" name="password1"/>
+          <br/>
+          <br/>
+          <label>Repeat your Password</label>
+          <input type="password" name="password2"/>
+          <hr/>
+          <button type="submit" class="button success"><span class="icon user"></span>Create Account</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</body>
 {% endblock %}
