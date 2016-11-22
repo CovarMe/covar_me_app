@@ -16,6 +16,7 @@ load_dotenv(dotenv_path)
 
 # create a Flask application
 app = Flask(__name__)
+app.secret_key = os.environ.get('SECRET_KEY')
 # inject bower (for front-end resource management)
 Bower(app)
 # connect to MongoDB

@@ -1,6 +1,6 @@
 import timeit
 import math
-from flask import render_template
+from flask import render_template, flash
 from db.helpers import *
 
 import random
@@ -20,14 +20,23 @@ def show_registration_form():
 
 
 def register_new_user(form):
+    errors = []
     if check_user(form['name']):
-        return "Username already exists, choose another of log in."
-    elif form['password1'] != form['password2']:
+        errors.append('Username already exists, choose another name or log in.')
+
+    if form['password1'] != form['password2']:
+        errors.append("Passwords don't match.")
+
+    if len(errors) > 0:
+        for error in errors:
+            flash(error, 'error')
+
         return show_registration_form()
     else:
         u = create_user(name = form['name'],
                           email = form['email'],
                           password = form['password1'])
+        flash('New user ' + u.name + ' created!')
         return show_new_portfolio_form(u.name)
 
 

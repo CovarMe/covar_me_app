@@ -33,9 +33,9 @@
 <script src="{{ url_for('bower.static', filename='devbridge-autocomplete/dist/jquery.autocomplete.min.js') }}"></script>
 <script>
 var tickers = [
-  {% for ticker in tickers %}
-  { data: "{{ ticker }}", value: "{{ ticker }}" },
-  {% endfor %}
+{% for ticker in tickers %}
+{ data: "{{ ticker }}", value: "{{ ticker }}" },
+{% endfor %}
 ];
 $('#ticker-autocomplete').autocomplete({
   lookup: tickers,
