@@ -27,15 +27,19 @@ def register_new_user(form):
     if form['password1'] != form['password2']:
         errors.append("Passwords don't match.")
 
+    try:
+        u = create_user(name = form['name'],
+                        email = form['email'],
+                        password = form['password1'])
+    except NotUniqueError:
+        errors.append('Already taken!')
+
     if len(errors) > 0:
         for error in errors:
             flash(error, 'error')
 
         return show_registration_form()
     else:
-        u = create_user(name = form['name'],
-                          email = form['email'],
-                          password = form['password1'])
         flash('New user ' + u.name + ' created!')
         return show_new_portfolio_form(u.name)
 
