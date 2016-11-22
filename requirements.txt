@@ -3,3 +3,8 @@ flask-pymongo
 flask-bower
 python-dotenv
 numpy
+werkzeug
+jinja2
+mongoengine
+itsdangerous
+click

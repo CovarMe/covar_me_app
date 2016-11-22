@@ -17,6 +17,7 @@ load_dotenv(dotenv_path)
 # create a Flask application
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY')
+
 # inject bower (for front-end resource management)
 Bower(app)
 # connect to MongoDB
@@ -66,3 +67,6 @@ def portfolio(username, portfolio_id):
 def test():
     return matrix_test()
 
+
+# start application
+app.run(host = '0.0.0.0')
