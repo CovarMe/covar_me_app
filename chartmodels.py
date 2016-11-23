@@ -16,13 +16,14 @@ def ret_vs_var_chart_model(tickers):
     }]
     return data
 
+
 def noise_chart_model(returns):
     data = []
     dates = map(lambda d:
                 datetime.datetime.fromtimestamp(
                     int(d)
                 ).strftime('%Y/%m/%d'),
-                list(returns))
+                returns.index)
     for i, ticker in enumerate(returns):
         data.append({
             'x': dates, 

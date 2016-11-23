@@ -3,6 +3,7 @@ from flask import render_template, flash
 from db.helpers import *
 from chartmodels import *
 from datamodels import *
+from pprint import pprint
 
 import random
 names = ["Donald","Yoda","LeBron James", 
@@ -59,11 +60,12 @@ def show_portfolio(username, portfolio_id):
     portfolio = get_portfolio(portfolio_id)
     tickers = [s['ticker'] for s in portfolio.stocks]
     # retrieve the corresponding returns timelines as a dataframe
-    returns = returns_as_dataframe(tickers)
+    returns = returns_as_dataframe(tickers, '5y-ago')
     # create chart data elements for all the different js charts 
     chart_data = {}
     chart_data['ret_vs_var'] = ret_vs_var_chart_model(tickers)
     chart_data['noise'] = noise_chart_model(returns)
+    pprint(chart_data['noise'])
     return render_template(
         'portfolio.html', 
         name = random.choice(names),

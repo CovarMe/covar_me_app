@@ -44,19 +44,21 @@ def get_portfolio(portfolio_id):
     return Portfolio.objects(id = portfolio_id).first()
 
 
-def opentsdb_query(companies, metrics, since):
-    n = len(companies) * len(metrics)
+def opentsdb_query(tickers, metrics, since):
+    n = len(tickers) * len(metrics)
     query_template = {
         "aggregator": "sum",
         "rate": "false",
         "tags": {}
     }
-    queries = [query_template] * n
+    queries = []
     for i, met in enumerate(metrics):
-        for j, com in enumerate(companies):
-            queries[i + j]['metric'] = com + '.' + met
-            queries[i + j]['rate'] = 'false'
-            queries[i + j]['tags'] = { 'company': com }
+        for j, ticker in enumerate(tickers):
+            q = query_template.copy()
+            q['metric'] = ticker + '.' + met
+            q['rate'] = 'false'
+            q['tags'] = { 'company': ticker }
+            queries.append(q)
 
     request_data = {
         "start": since,
