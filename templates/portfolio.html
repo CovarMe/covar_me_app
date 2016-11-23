@@ -13,7 +13,7 @@
         {% endif %}
         <div id="graph" style="width:100%;height:550px;"></div>
         <script>
-var data = {{ data.ret_vs_var|tojson }}
+var data = {{ data.charts.ret_vs_var|tojson }}
 var layout = {
   paper_bgcolor: "rgb(255,255,255)", 
   plot_bgcolor: "rgb(229,229,229)", 

@@ -44,7 +44,7 @@ def get_portfolio(portfolio_id):
     return Portfolio.objects(id = portfolio_id).first()
 
 
-def opentsdb_query(companies, metrics):
+def opentsdb_query(companies, metrics, since):
     n = len(companies) * len(metrics)
     query_template = {
         "aggregator": "sum",
@@ -59,12 +59,16 @@ def opentsdb_query(companies, metrics):
             queries[i + j]['tags'] = { 'company': com }
 
     request_data = {
-        "start": "5y-ago",
+        "start": since,
         "queries": queries
     }
-    print(request_data)
+    print request_data
     request_url = opentsdb_url + "query?summary=true&details=true"
     response = requests.post(request_url, data = json.dumps(request_data))
+    # really need some better error handling here
+    if not response.ok:
+        raise RuntimeError(response.content)
+
     response_dict = response.json()
     if 'error' in response_dict:
         return {'success': False, 'error': response_dict['error']['message']}
