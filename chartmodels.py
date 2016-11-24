@@ -1,4 +1,5 @@
 import math
+import random
 import datetime
 from db.helpers import *
 from db.mongo_schemata import *
@@ -28,7 +29,7 @@ def noise_chart_model(returns):
         data.append({
             'x': dates, 
             'y': returns[ticker].tolist(), 
-            'line': {'color': "blue"}, 
+            'line': {'color': "rgb(" + ",".join(str(random.sample(range(0, 255), 3))) + ")"}, 
             'mode': "lines", 
             'name': ticker, 
             'type': "scatter"})
