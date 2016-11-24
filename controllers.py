@@ -1,7 +1,9 @@
 import timeit
-import math
 from flask import render_template, flash
 from db.helpers import *
+from chartmodels import *
+from datamodels import *
+from pprint import pprint
 
 import random
 names = ["Donald","Yoda","LeBron James", 
@@ -54,32 +56,22 @@ def create_new_portfolio(username, name, tickers):
     return show_portfolio(username, portfolio_id) 
 
 
-# TODO
 def show_portfolio(username, portfolio_id):
-    p = get_portfolio(portfolio_id)
-    data = {}
-    opentsdb_res = opentsdb_query(
-        [s['ticker'] for s in p.stocks],
-        ['price']
-    )
-    if opentsdb_res['success']:
-        data['ts'] = []
-        for metric in opentsdb_res['data']:
-            data['ts'].append(metric['dps'])
-
-    data['ret_vs_var'] = [{
-        'x': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 
-        'y': [math.log(i) for i in range(1,11)], 
-        'line': {'color': "rgb(0,100,80)"}, 
-        'mode': "lines", 
-        'name': "Fair", 
-        'type': "scatter"
-    }]
-
+    portfolio = get_portfolio(portfolio_id)
+    tickers = [s['ticker'] for s in portfolio.stocks]
+    # retrieve the corresponding returns timelines as a dataframe
+    returns = returns_as_dataframe(tickers, '5y-ago')
+    # create chart data elements for all the different js charts 
+    chart_data = {}
+    chart_data['ret_vs_var'] = ret_vs_var_chart_model(tickers)
+    chart_data['noise'] = noise_chart_model(returns)
+    pprint(chart_data['noise'])
     return render_template(
         'portfolio.html', 
         name = random.choice(names),
-        data = data)
+        data = {
+            'charts': chart_data
+        })
 
 
 # TODO
