@@ -8,3 +8,5 @@ jinja2
 mongoengine
 itsdangerous
 click
+pandas
+numpy
