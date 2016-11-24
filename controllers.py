@@ -1,7 +1,9 @@
 import timeit
-import math
 from flask import render_template, flash
 from db.helpers import *
+from chartmodels import *
+from datamodels import *
+from pprint import pprint
 
 import random
 names = ["Donald","Yoda","LeBron James", 
@@ -18,7 +20,6 @@ def show_homepage():
 def show_registration_form():
     return render_template('registration.html')
 
-
 def register_new_user(form):
     errors = []
     if check_user(form['name']):
@@ -27,17 +28,48 @@ def register_new_user(form):
     if form['password1'] != form['password2']:
         errors.append("Passwords don't match.")
 
+    try:
+        u = create_user(name = form['name'],
+                        email = form['email'],
+                        password = form['password1'])
+    except NotUniqueError:
+        errors.append('Already taken!')
+
     if len(errors) > 0:
         for error in errors:
             flash(error, 'error')
 
         return show_registration_form()
     else:
-        u = create_user(name = form['name'],
-                          email = form['email'],
-                          password = form['password1'])
         flash('New user ' + u.name + ' created!')
         return show_new_portfolio_form(u.name)
+
+
+def show_login_form():
+    return render_template('login.html')
+
+
+def login_user(form):
+    errors = []
+    print(form)
+    u = auth_user(form['email'], form['password'])
+    if not u:
+        errors.append("Can't log in with those credentials")
+
+    if len(errors) > 0:
+        for error in errors:
+            flash(error, 'error')
+
+        return show_login_form()
+    else:
+        return show_portfolio_list(u.name)
+
+
+def show_portfolio_list(username):
+    u = User.objects(name = username).first()
+    return render_template('portfolio_list.html',
+                           name = u.name,
+                           portfolios = u.portfolios)
 
 
 def show_new_portfolio_form(username):
@@ -54,32 +86,22 @@ def create_new_portfolio(username, name, tickers):
     return show_portfolio(username, portfolio_id) 
 
 
-# TODO
 def show_portfolio(username, portfolio_id):
-    p = get_portfolio(portfolio_id)
-    data = {}
-    opentsdb_res = opentsdb_query(
-        [s['ticker'] for s in p.stocks],
-        ['price']
-    )
-    if opentsdb_res['success']:
-        data['ts'] = []
-        for metric in opentsdb_res['data']:
-            data['ts'].append(metric['dps'])
-
-    data['ret_vs_var'] = [{
-        'x': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 
-        'y': [math.log(i) for i in range(1,11)], 
-        'line': {'color': "rgb(0,100,80)"}, 
-        'mode': "lines", 
-        'name': "Fair", 
-        'type': "scatter"
-    }]
-
+    portfolio = get_portfolio(portfolio_id)
+    tickers = [s['ticker'] for s in portfolio.stocks]
+    # retrieve the corresponding returns timelines as a dataframe
+    returns = returns_as_dataframe(tickers, '5y-ago')
+    # create chart data elements for all the different js charts 
+    chart_data = {}
+    chart_data['ret_vs_var'] = ret_vs_var_chart_model(tickers)
+    chart_data['noise'] = noise_chart_model(returns)
+    pprint(chart_data['noise'])
     return render_template(
         'portfolio.html', 
         name = random.choice(names),
-        data = data)
+        data = {
+            'charts': chart_data
+        })
 
 
 # TODO

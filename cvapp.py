@@ -17,6 +17,7 @@ load_dotenv(dotenv_path)
 # create a Flask application
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY')
+
 # inject bower (for front-end resource management)
 Bower(app)
 # connect to MongoDB
@@ -36,6 +37,16 @@ def register():
         return register_new_user(request.form)
     elif request.method == 'GET':
         return show_registration_form()
+    else: 
+        return 404
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        return login_user(request.form)
+    elif request.method == 'GET':
+        return show_login_form()
     else: 
         return 404
 
@@ -66,3 +77,6 @@ def portfolio(username, portfolio_id):
 def test():
     return matrix_test()
 
+
+# start application
+app.run(host = '0.0.0.0')
