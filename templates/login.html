@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}Registration{% endblock %}
+{% block body %}
+<body>
+  <section class="bck white padding text center">
+    <div class="row padding-bottom">
+      <h1>Create a User Account</h1>
+      <p>Go in and get your <strong>Covar</strong>iance.</p>
+      <form id="form" name="login-form" action="/login" method='POST' class="margin-top">
+        <div class="column_10 offset_1">
+          <br/>
+          <br/>
+          <label>Enter your Email</label>
+          <input type="email" name="email"/>
+          <br/>
+          <br/>
+          <label>Enter your Password</label>
+          <input type="password" name="password"/>
+          <hr/>
+          <button type="submit" class="button success"><span class="icon user"></span>Login</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</body>
+{% endblock %}

@@ -20,7 +20,6 @@ def show_homepage():
 def show_registration_form():
     return render_template('registration.html')
 
-
 def register_new_user(form):
     errors = []
     if check_user(form['name']):
@@ -29,17 +28,48 @@ def register_new_user(form):
     if form['password1'] != form['password2']:
         errors.append("Passwords don't match.")
 
+    try:
+        u = create_user(name = form['name'],
+                        email = form['email'],
+                        password = form['password1'])
+    except NotUniqueError:
+        errors.append('Already taken!')
+
     if len(errors) > 0:
         for error in errors:
             flash(error, 'error')
 
         return show_registration_form()
     else:
-        u = create_user(name = form['name'],
-                          email = form['email'],
-                          password = form['password1'])
         flash('New user ' + u.name + ' created!')
         return show_new_portfolio_form(u.name)
+
+
+def show_login_form():
+    return render_template('login.html')
+
+
+def login_user(form):
+    errors = []
+    print(form)
+    u = auth_user(form['email'], form['password'])
+    if not u:
+        errors.append("Can't log in with those credentials")
+
+    if len(errors) > 0:
+        for error in errors:
+            flash(error, 'error')
+
+        return show_login_form()
+    else:
+        return show_portfolio_list(u.name)
+
+
+def show_portfolio_list(username):
+    u = User.objects(name = username).first()
+    return render_template('portfolio_list.html',
+                           name = u.name,
+                           portfolios = u.portfolios)
 
 
 def show_new_portfolio_form(username):

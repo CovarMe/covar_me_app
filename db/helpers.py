@@ -20,6 +20,15 @@ def check_user(username):
         return True
 
 
+def auth_user(email, password):
+    u = User.objects(email = email,
+                password = password).first()
+    if u == None:
+        return False
+    else:
+        return u
+
+
 def create_user(name, email, password):
     u = User(name = name,
              email = email, 
