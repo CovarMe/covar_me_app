@@ -18,7 +18,6 @@ def show_homepage():
 def show_registration_form():
     return render_template('registration.html')
 
-
 def register_new_user(form):
     errors = []
     if check_user(form['name']):
@@ -42,6 +41,33 @@ def register_new_user(form):
     else:
         flash('New user ' + u.name + ' created!')
         return show_new_portfolio_form(u.name)
+
+
+def show_login_form():
+    return render_template('login.html')
+
+
+def login_user(form):
+    errors = []
+    print(form)
+    u = auth_user(form['email'], form['password'])
+    if not u:
+        errors.append("Can't log in with those credentials")
+
+    if len(errors) > 0:
+        for error in errors:
+            flash(error, 'error')
+
+        return show_login_form()
+    else:
+        return show_portfolio_list(u.name)
+
+
+def show_portfolio_list(username):
+    u = User.objects(name = username).first()
+    return render_template('portfolio_list.html',
+                           name = u.name,
+                           portfolios = u.portfolios)
 
 
 def show_new_portfolio_form(username):

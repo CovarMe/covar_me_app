@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}Portfolio{% endblock %}
+
+{% block top_imports %}
+<script src="{{ url_for('bower.static', filename='plotly/plotly.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+<body>
+  <section class="bck white padding text center">
+    <div class="row padding-bottom">
+      <div class="column_10 offset_1">
+        <h1>Hello {{ name }}!</h1>
+        <p>Select one of your portfolios below</p>
+        <br/>
+        {% for portfolio in portfolios %}
+        <a class="text bold" href="portfolio/{{ name }}-{{ portfolio.id }}">{{ portfolio.name }}</a>
+        <br/>
+        {% endfor %}
+      </div>
+    </div>
+</body>
+{% endblock %}
+

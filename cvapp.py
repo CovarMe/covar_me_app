@@ -40,6 +40,16 @@ def register():
         return 404
 
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        return login_user(request.form)
+    elif request.method == 'GET':
+        return show_login_form()
+    else: 
+        return 404
+
+
 @app.route('/new-portfolio/<username>', methods=['GET', 'POST'])
 def new_portfolio(username):
     if request.method == 'POST':
