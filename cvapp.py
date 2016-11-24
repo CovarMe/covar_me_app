@@ -51,6 +51,11 @@ def login():
         return 404
 
 
+@app.route('/portfolios/<username>')
+def portfolios(username):
+    return show_portfolio_list(username)
+
+
 @app.route('/new-portfolio/<username>', methods=['GET', 'POST'])
 def new_portfolio(username):
     if request.method == 'POST':
