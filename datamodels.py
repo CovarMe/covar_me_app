@@ -18,5 +18,6 @@ def returns_as_dataframe(tickers, since = '1y-ago'):
         raise RuntimeError(db_res['error'])
 
     data = pd.DataFrame.from_dict(ts).transpose()
-    data = data.rename(index = str, columns = tickers)
+    data = data.rename(index = str, columns = tickers) # add the tickers as column names
+    data = data.multiply(100) # make percentage-wise values
     return data

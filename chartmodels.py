@@ -29,7 +29,10 @@ def noise_chart_model(returns):
         data.append({
             'x': dates, 
             'y': returns[ticker].tolist(), 
-            'line': {'color': "rgb(" + ",".join(str(random.sample(range(0, 255), 3))) + ")"}, 
+            'line': {
+              'color': "rgb(" + ",".join(str(random.sample(range(0, 255), 3))) + ")",
+              'width': 0.5
+            }, 
             'mode': "lines", 
             'name': ticker, 
             'type': "scatter"})

@@ -1,4 +1,4 @@
-import os, requests, json, time, datetime, math
+import os, requests, json, time, datetime, math, re
 import numpy as np
 import pandas as pd
 from mongo_schemata import *
@@ -77,9 +77,14 @@ def opentsdb_query(tickers, metrics, since):
     print request_data
     request_url = opentsdb_url + "query?summary=true&details=true"
     response = requests.post(request_url, data = json.dumps(request_data))
-    # really need some better error handling here
     if not response.ok:
-        raise RuntimeError(response.content)
+        response_content_dict = json.loads(response.content)
+        print(response_content_dict)
+        m = re.search("(?<=No\ such\ name\ for\ \'tagv\':\ \')[A-Za-z]*(?=\')",
+                      response_content_dict['error']['message'])
+        Stock.objects(ticker = m.group(0)).first().delete()
+        tickers.remove(m.group(0))
+        return opentsdb_query(tickers, metrics, since)
 
     response_dict = response.json()
     if 'error' in response_dict:
