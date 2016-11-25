@@ -81,43 +81,10 @@ Plotly.plot('noise-graph', {{ data.charts.noise|tojson }}, layout);
       <div class="column_10 offset_1">
         <div id="covar-heatmap-graph" style="width:100%;height:550px;"></div>
         <script>
-var x = [];
-var y = [];
-for (var i = 0; i < 500; i ++) {
-  x[i] = Math.random();
-  y[i] = Math.random() + 1;
-}
-
-var data = [
-{
-  x: x,
-  y: y,
-  type: 'histogram2d'
-}
-];
-Plotly.newPlot('covar-heatmap-graph', data);
+Plotly.newPlot('covar-heatmap-graph', {{ data.charts.covar_heatmap|tojson }});
         </script>
       </div>
     </div>
-
-    <!--
-      <div class="row padding-bottom">
-      <div class="column_10 offset_1">
-      <div id="other-graph" style="width:100%;height:550px;"></div>
-      <script>
-
-Plotly.plot('other-graph', data, {
-  title: 'Ribbon Plot',
-  showlegend: false,
-  autosize: true,
-  width: 600,
-  height: 600,
-});
-
-      </script>
-      </div>
-      </div>
-      -->
 
       <section class="landing">
         <div class="row text center">

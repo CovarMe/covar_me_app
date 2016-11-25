@@ -1,4 +1,5 @@
 import timeit
+import string
 from flask import render_template, flash
 from db.helpers import *
 from chartmodels import *
@@ -89,10 +90,10 @@ def show_portfolio(username, portfolio_id):
     tickers = [s['ticker'] for s in portfolio.stocks]
     # retrieve the corresponding returns timelines as a dataframe
     returns = returns_as_dataframe(tickers, '5y-ago')
-    covar = read_mongodb_covar_matrix(tickers)
-    print(covar)
+    covar = read_mongodb_covar_matrix(list(string.ascii_lowercase[0:15]))
     # create chart data elements for all the different js charts 
     chart_data = {}
+    chart_data['covar_heatmap'] = covar_heatmap_chart_model(covar)
     chart_data['ret_vs_var'] = ret_vs_var_chart_model(tickers)
     chart_data['noise'] = noise_chart_model(returns)
     return render_template(
@@ -106,6 +107,8 @@ def show_portfolio(username, portfolio_id):
 # TODO
 def matrix_test():
     start = time.clock()
+    new_mat = np.random.rand(15,15)
+    create_mongodb_covar_matrix(new_mat, list(string.ascii_lowercase[0:15]))
     mat = read_mongodb_covar_matrix(range(15,45))
     end = time.clock()
     return str(end - start)

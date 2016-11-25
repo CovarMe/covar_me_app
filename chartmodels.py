@@ -39,3 +39,12 @@ def noise_chart_model(returns):
 
     return data
 
+
+def covar_heatmap_chart_model(covar):
+    data = [{
+        'type': 'heatmap',
+        'x': covar.index.tolist(),
+        'y': list(covar),
+        'z': covar.as_matrix().tolist()
+    }]
+    return data
