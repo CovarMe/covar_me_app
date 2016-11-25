@@ -2,6 +2,7 @@ import pandas as pd
 from db.helpers import *
 from pprint import pprint
 
+
 def returns_as_dataframe(tickers, since = '1y-ago'):
     db_res = opentsdb_query(tickers,
                             ['return'],

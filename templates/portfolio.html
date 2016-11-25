@@ -76,6 +76,30 @@ Plotly.plot('noise-graph', {{ data.charts.noise|tojson }}, layout);
       </div>
     </div>
 
+    <!-- Portfolio Covariance Heatmap -->
+    <div class="row padding-bottom">
+      <div class="column_10 offset_1">
+        <div id="covar-heatmap-graph" style="width:100%;height:550px;"></div>
+        <script>
+var x = [];
+var y = [];
+for (var i = 0; i < 500; i ++) {
+  x[i] = Math.random();
+  y[i] = Math.random() + 1;
+}
+
+var data = [
+{
+  x: x,
+  y: y,
+  type: 'histogram2d'
+}
+];
+Plotly.newPlot('covar-heatmap-graph', data);
+        </script>
+      </div>
+    </div>
+
     <!--
       <div class="row padding-bottom">
       <div class="column_10 offset_1">

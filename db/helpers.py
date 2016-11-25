@@ -1,5 +1,6 @@
-import os, requests, json, time, datetime
+import os, requests, json, time, datetime, math
 import numpy as np
+import pandas as pd
 from mongo_schemata import *
 
 opentsdb_url = "http://" \
@@ -89,13 +90,13 @@ def opentsdb_query(tickers, metrics, since):
         return {'success': True, 'data': response_dict}
 
 
-def create_mongodb_covar_matrix(mat, names):
+def create_mongodb_covar_matrix(mat, tickers):
     it = np.nditer(mat, flags=['f_index','multi_index'])
     while not it.finished:
         if it.multi_index[0] <= it.multi_index[1]:
             print('Create covariance cell: ' + str(it[0]))
-            MatrixItem.objects(i = names[it.multi_index[0]],
-                               j = names[it.multi_index[1]]
+            MatrixItem.objects(i = tickers[it.multi_index[0]],
+                               j = tickers[it.multi_index[1]]
                               ).update_one(set__v = it[0], upsert = True)
 
         it.iternext()
@@ -103,9 +104,17 @@ def create_mongodb_covar_matrix(mat, names):
     return " ".join([(str(mi['i']) + str(mi['j']) + ": " + str(mi['v'])) for mi in MatrixItem.objects()])
 
 
-def read_mongodb_covar_matrix(names):
-    mis = MatrixItem.objects(i__in = names,
-                             j__in = names)
-    print(mis)
-    return " ".join([(str(mi['i']) + str(mi['j']) + ": " + str(mi['v'])) for mi in mis])
+def read_mongodb_covar_matrix(tickers):
+    mis = MatrixItem.objects(i__in = tickers,
+                             j__in = tickers)
+    n = len(tickers)
+    available_tickers = set([mi.i for mi in mis])
+    covar_matrix = pd.DataFrame(np.empty([n, n]),
+                             index = tickers,
+                             columns = tickers)
+    for mi in mis:
+        covar_matrix.set_value(mi.i, mi.j, mi.v)
+        covar_matrix.set_value(mi.j, mi.i, mi.v)
+
+    return covar_matrix
 

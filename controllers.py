@@ -89,6 +89,8 @@ def show_portfolio(username, portfolio_id):
     tickers = [s['ticker'] for s in portfolio.stocks]
     # retrieve the corresponding returns timelines as a dataframe
     returns = returns_as_dataframe(tickers, '5y-ago')
+    covar = read_mongodb_covar_matrix(tickers)
+    print(covar)
     # create chart data elements for all the different js charts 
     chart_data = {}
     chart_data['ret_vs_var'] = ret_vs_var_chart_model(tickers)
@@ -103,10 +105,7 @@ def show_portfolio(username, portfolio_id):
 
 # TODO
 def matrix_test():
-    # mat = np.eye(100, dtype = float)
     start = time.clock()
-    # create_mongodb_covar_matrix(mat, range(100))
-    mat = read_mongodb_covar_matrix(range(25,45))
+    mat = read_mongodb_covar_matrix(range(15,45))
     end = time.clock()
-    # return str(end - start)
-    return mat 
+    return str(end - start)
