@@ -90,15 +90,13 @@ def show_portfolio(username, portfolio_id):
     tickers = [s['ticker'] for s in portfolio.stocks]
     # retrieve the corresponding returns timelines as a dataframe
     returns = returns_as_dataframe(tickers, '5y-ago')
-    print(list(std_data('mtcars')))
-    covar = matrix_greedy_heatmap_sorted(list(std_data('mtcars')),
+    covar = matrix_greedy_heatmap_sorted(std_data('mtcars').index.tolist(),
                                          'covariance')
     # create chart data elements for all the different js charts 
     chart_data = {}
     chart_data['covar_heatmap'] = covar_heatmap_chart_model(covar)
     chart_data['ret_vs_var'] = ret_vs_var_chart_model(tickers)
     chart_data['noise'] = noise_chart_model(returns)
-    # chart_data['covar_detail'] = covar_detail_chart_model(covar)
     return render_template(
         'portfolio.html', 
         username = username,
@@ -113,6 +111,6 @@ def matrix_test():
     start = time.clock()
     mtcars = std_data('mtcars')
     create_mongodb_matrix(np.cov(mtcars), mtcars.index.tolist(), 'covariance')
-    mat = read_mongodb_matrix(mtcars.index.tolist(), 'covariance')
+    mat = read_mongodb_matrix(list(mtcars), 'covariance')
     end = time.clock()
     return str(end - start)
