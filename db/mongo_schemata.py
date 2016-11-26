@@ -19,7 +19,8 @@ class User(Document):
 
 
 class MatrixItem(Document):
-    i = StringField(required = True, max_length = 8, unique_with = 'j')
-    j = StringField(required = True, max_length = 8, unique_with = 'i')
+    i = StringField(required = True, max_length = 8)
+    j = StringField(required = True, max_length = 8)
     v = FloatField(required = True)
+    matrix_name = StringField(max_length = 64, unique_with = ['i','j'])
 

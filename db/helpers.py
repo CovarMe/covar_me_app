@@ -111,17 +111,18 @@ def create_mongodb_covar_matrix(mat, tickers):
     return " ".join([(str(mi['i']) + str(mi['j']) + ": " + str(mi['v'])) for mi in MatrixItem.objects()])
 
 
-def read_mongodb_covar_matrix(tickers):
+def read_mongodb_matrix(tickers, matrix_name):
     mis = MatrixItem.objects(i__in = tickers,
-                             j__in = tickers)
+                             j__in = tickers,
+                             matrix = matrix_name)
     n = len(tickers)
     available_tickers = set([mi.i for mi in mis])
-    covar_matrix = pd.DataFrame(np.empty([n, n]),
+    matrix = pd.DataFrame(np.empty([n, n]),
                              index = tickers,
                              columns = tickers)
     for mi in mis:
-        covar_matrix.set_value(mi.i, mi.j, mi.v)
-        covar_matrix.set_value(mi.j, mi.i, mi.v)
+        matrix.set_value(mi.i, mi.j, mi.v)
+        matrix.set_value(mi.j, mi.i, mi.v)
 
-    return covar_matrix
+    return matrix
 
