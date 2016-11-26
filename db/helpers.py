@@ -74,7 +74,6 @@ def opentsdb_query(tickers, metrics, since):
         "start": since,
         "queries": queries
     }
-    print request_data
     request_url = opentsdb_url + "query?summary=true&details=true"
     response = requests.post(request_url, data = json.dumps(request_data))
     if not response.ok:

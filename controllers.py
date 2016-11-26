@@ -99,7 +99,8 @@ def show_portfolio(username, portfolio_id):
     chart_data['noise'] = noise_chart_model(returns)
     return render_template(
         'portfolio.html', 
-        name = random.choice(names),
+        username = username,
+        name = portfolio.name,
         data = {
             'charts': chart_data
         })
