@@ -111,6 +111,6 @@ def matrix_test():
     start = time.clock()
     mtcars = std_data('mtcars')
     create_mongodb_matrix(np.cov(mtcars), mtcars.index.tolist(), 'covariance')
-    mat = read_mongodb_matrix(list(mtcars), 'covariance')
+    mat = read_mongodb_matrix(mtcars.index.tolist(), 'covariance')
     end = time.clock()
     return str(end - start)
