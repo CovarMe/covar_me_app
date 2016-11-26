@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 from db.helpers import *
 from pprint import pprint
@@ -13,7 +14,7 @@ def returns_as_dataframe(tickers, since = '1y-ago'):
         for i, metric in enumerate(db_res['data']):
             ts.append(metric['dps'])
             tickers[i] = metric['tags']['company']
-            
+
     else:
         raise RuntimeError(db_res['error'])
 
@@ -21,3 +22,21 @@ def returns_as_dataframe(tickers, since = '1y-ago'):
     data = data.rename(index = str, columns = tickers) # add the tickers as column names
     data = data.multiply(100) # make percentage-wise values
     return data
+
+
+from pydataset import data as std_data
+def covar_matrix_sorted(tickers):
+    mtcars = std_data('mtcars')
+    data = pd.DataFrame(np.cov(mtcars),
+                        index = mtcars.index,
+                        columns = mtcars.index)
+    # data = read_mongodb_covar_matrix(tickers)
+    availbl = data.index.tolist()
+    order = []
+    for i in range(len(availbl) - 1):
+        remain = data.loc[availbl, availbl]
+        ldi = (remain[availbl[0]] - remain[availbl[1]]).idxmin()
+        availbl.remove(ldi)
+        order.append(ldi)
+
+    return data.loc[order, order]

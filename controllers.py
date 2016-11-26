@@ -90,7 +90,7 @@ def show_portfolio(username, portfolio_id):
     tickers = [s['ticker'] for s in portfolio.stocks]
     # retrieve the corresponding returns timelines as a dataframe
     returns = returns_as_dataframe(tickers, '5y-ago')
-    covar = read_mongodb_covar_matrix(list(string.ascii_lowercase[0:15]))
+    covar = covar_matrix_sorted(list(string.ascii_lowercase[0:15]))
     # create chart data elements for all the different js charts 
     chart_data = {}
     chart_data['covar_heatmap'] = covar_heatmap_chart_model(covar)
