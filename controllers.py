@@ -110,8 +110,8 @@ def show_portfolio(username, portfolio_id):
 # TODO
 def matrix_test():
     start = time.clock()
-    new_mat = np.random.rand(15,15)
-    create_mongodb_matrix(new_mat, list(string.ascii_lowercase[0:15]), 'covariance')
-    mat = read_mongodb_matrix(range(15,45), 'covariance')
+    mtcars = std_data('mtcars')
+    create_mongodb_matrix(np.cov(mtcars), mtcars.index.tolist(), 'covariance')
+    mat = read_mongodb_matrix(range(15), 'covariance')
     end = time.clock()
     return str(end - start)

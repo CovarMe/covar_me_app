@@ -102,7 +102,8 @@ def create_mongodb_matrix(mat, tickers, matrix_name):
         if it.multi_index[0] <= it.multi_index[1]:
             print('Create covariance cell: ' + str(it[0]))
             MatrixItem.objects(i = tickers[it.multi_index[0]],
-                               j = tickers[it.multi_index[1]]
+                               j = tickers[it.multi_index[1]],
+                               matrix_name = matrix_name
                               ).update_one(set__v = it[0], upsert = True)
 
         it.iternext()
