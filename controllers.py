@@ -97,6 +97,7 @@ def show_portfolio(username, portfolio_id):
     chart_data['covar_heatmap'] = covar_heatmap_chart_model(covar)
     chart_data['ret_vs_var'] = ret_vs_var_chart_model(tickers)
     chart_data['noise'] = noise_chart_model(returns)
+    chart_data['covar_detail'] = covar_detail_chart_model(covar)
     return render_template(
         'portfolio.html', 
         username = username,
