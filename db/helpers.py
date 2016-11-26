@@ -94,7 +94,7 @@ def opentsdb_query(tickers, metrics, since):
         return {'success': True, 'data': response_dict}
 
 
-def create_mongodb_covar_matrix(mat, tickers):
+def create_mongodb_matrix(mat, tickers, matrix_name):
     print(len(mat))
     print(len(tickers))
     it = np.nditer(mat, flags=['f_index','multi_index'])
@@ -113,7 +113,7 @@ def create_mongodb_covar_matrix(mat, tickers):
 def read_mongodb_matrix(tickers, matrix_name):
     mis = MatrixItem.objects(i__in = tickers,
                              j__in = tickers,
-                             matrix = matrix_name)
+                             matrix_name = matrix_name)
     n = len(tickers)
     available_tickers = set([mi.i for mi in mis])
     matrix = pd.DataFrame(np.empty([n, n]),
