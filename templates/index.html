@@ -1,76 +1,36 @@
 {% extends "layout.html" %}
+
+{% block top_imports %}
+<script src="{{ url_for('bower.static', filename='plotly/plotly.js') }}"></script>
+{% endblock %}
+
 {% block body %}
 <body>
   <section class="bck white padding text center">
-    <div class="row padding-bottom">
-      <div class="column_10 offset_1">
-        <script src="{{ url_for('bower.static', filename='plotly/plotly.js') }}"></script>
-        <title>Hello from Flask</title>
-        {% if name %}
-        <h1>Hello {{ name }}!</h1>
-        {% else %}
-        <h1>Hello, World!</h1>
-        {% endif %}
-        <div id="chart" style="width:100%;height:550px;"></div>
-        <script>
-var rawDataURL = 'https://raw.githubusercontent.com/plotly/datasets/master/2016-weather-data-seattle.csv';
-var xField = 'Date';
-var yField = 'Mean_TemperatureC';
-
-var selectorOptions = {
-  buttons: [{
-    step: 'month',
-    stepmode: 'backward',
-    count: 1,
-    label: '1m'
-  }, {
-    step: 'month',
-    stepmode: 'backward',
-    count: 6,
-    label: '6m'
-  }, {
-    step: 'year',
-    stepmode: 'todate',
-    count: 1,
-    label: 'YTD'
-  }, {
-    step: 'year',
-    stepmode: 'backward',
-    count: 1,
-    label: '1y'
-  }, {
-    step: 'all',
-  }],
-};
-
-Plotly.d3.csv(rawDataURL, function(err, rawData) {
-  if(err) throw err;
-
-  var layout = {
-    title: 'Time series with range slider and selectors',
-    xaxis: {
-      rangeselector: selectorOptions,
-      rangeslider: {}
-    },
-    yaxis: {
-      fixedrange: true
-    }
-  };
-
-  Plotly.plot('graph', data, layout);
-});
-        </script>
-        </h4>
+    <h1>Welcome to <strong>Covar</strong>Me</h1>
+    <div class="row text center">
+      <hr/>
+      <div class="column_4 offset_2">
+        <p>As part of the 2016/17 cohort of the Data Science course at the Barcelona Graduate School of Economics, we have build this application to implement some of the tools and techniques gained during the course and to showcase our skills in data-processing and computing.</p>
+        </p>
+      </div>
+      <div class="column_4">
+        <img src="http://www.barcelonagse.eu/sites/default/files/styles/bgse_image_content_image/public/news/gselogo-square640.jpg?itok=FHq6rCJZ" width="100%"/>
       </div>
     </div>
-    <section class="landing">
-      <div class="row text center">
-        <div class="column_10 offset_1">
-          <h2 class="text bold color theme">Lorem ipsum dolor sit amet</h2>
-          <h4 class="text book italic">Quam sunt quos minima consequatur</h4>
-          <a href="#" class="button large margin-top">Yes, please!</a>
-        </div>
+  </section>
+  <section class="bck white padding text center">
+    <div class="row text center">
+      <div class="column_6 offset_3">
+        <p><strong>Built by:</strong></p>
+        <p>Santiago Paz</p>
+        <p>David Rosenfeld</p>
+        <p>Davide Viviano</p>
+        <p><a href="github.com/Westermann">Jonas Paul Westermann</a></p>
       </div>
-    </section>
+    </div>
+    <hr/>
+    <a href="register" class="button success large margin-top">Get Started</a>
+  </section>
 </body>
 {% endblock %}
