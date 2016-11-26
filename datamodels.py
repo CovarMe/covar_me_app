@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 from db.helpers import *
 from pprint import pprint
+from pydataset import data as std_data
 
 
 def returns_as_dataframe(tickers, since = '1y-ago'):
@@ -24,14 +25,9 @@ def returns_as_dataframe(tickers, since = '1y-ago'):
     return data
 
 
-from pydataset import data as std_data
 # greedy algorithm to sort the matrix to look good on heatmap
 def matrix_greedy_heatmap_sorted(tickers, matrix_name):
-    mtcars = std_data('mtcars')
-    data = pd.DataFrame(np.cov(mtcars),
-                        index = mtcars.index,
-                        columns = mtcars.index)
-    # data = read_mongodb_matrix(tickers, 'precision')
+    data = read_mongodb_matrix(tickers, matrix_name)
     availbl = data.index.tolist()
     order = []
     for i in range(len(availbl) - 1):

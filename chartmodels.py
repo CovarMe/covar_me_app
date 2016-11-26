@@ -48,8 +48,3 @@ def covar_heatmap_chart_model(covar):
         'z': covar.as_matrix().tolist()
     }]
     return data
-
-
-def covar_detail_chart_model(covar):
-    for idx in covar.index.tolist():
-
