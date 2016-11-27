@@ -6,26 +6,26 @@
 
 {% block body %}
 <body>
-  <section class="bck white padding text center">
+
+  <section class="bck white text center">
     <h1>Welcome to <strong>Covar</strong>Me</h1>
     <div class="row text center">
-      <hr/>
-      <div class="column_4 offset_2">
+      <div class="column_8 offset_2">
         <p>As part of the 2016/17 cohort of the Data Science course at the Barcelona Graduate School of Economics, we have build this application to implement some of the tools and techniques gained during the course and to showcase our skills in data-processing and computing.</p>
         </p>
-      </div>
-      <div class="column_4">
-        <img src="http://www.barcelonagse.eu/sites/default/files/styles/bgse_image_content_image/public/news/gselogo-square640.jpg?itok=FHq6rCJZ" width="100%"/>
+        <p></p>
+        <img src="http://www.barcelonagse.eu/sites/default/files/styles/bgse_image_content_image/public/news/gselogo-square640.jpg?itok=FHq6rCJZ" style="max-width: 100%; width: 350px;"/>
       </div>
     </div>
   </section>
-  <section class="bck white padding text center">
+
+  <section class="bck white text center">
     <div class="row text center">
       <div class="column_3 offset_3">
         <p><strong>Built by:</strong></p>
         <p><a href="https://github.com/pantisaz">Santiago Paz</a></p>
-        <p>David Rosenfeld</p>
-        <p>Davide Viviano</p>
+        <p><a href="https://www.linkedin.com/in/david-rosenfeld-a699b143">David Rosenfeld</a></p>
+        <p><a href="https://github.com/dviviano">Davide Viviano</a></p>
         <p><a href="https://github.com/Westermann">Jonas Paul Westermann</a></p>
       </div>
       <div class="column_3">
@@ -34,52 +34,69 @@
         <p><a href="http://www.barcelonagse.eu/people/bartolozzi-guglielmo">Guglielmo Bartolozzi</a></p>
       </div>
     </div>
+    <div class="row text center">
+      <a href="register" class="button success large margin-top">Get Started</a>
+    </div>
     <br/>
-    <p><a href="register" class="button success large margin-top">Get Started</a> or read about... (scroll down)</p>
   </section>
-  <br/>
-  <section class="bck white padding text center">
-    <h2><strong>Tech</strong> we use...</h2>
-    <p>...on a machine that is way to small for that to even make sense (students have no money for AWS).</p>
-    <br/>
+
+  <hr/>
+
+  <section class="bck white text center">
+    <div class="row text center">
+      <h2>Tech we <strong>use</strong>...</h2>
+      <p>...on a machine that is way to small for that to even make sense (students have no money for AWS).</p>
+    </div>
     <div class="row text center">
       <div class="column_3">
-        <a href="http://hadoop.apache.org/"><img width="100%" src="http://cloudtimes.org/wp-content/uploads/2013/06/hadoop-logo-square.jpg"/></a>
+        <a href="https://www.r-project.org/"><img style="max-width: 200px;" width="80%" src="https://www.r-project.org/Rlogo.png"/></a>
       </div>
       <div class="column_3">
-        <a href="http://opentsdb.net/"><img width="100%" src="http://opentsdb.net/img/logo_header.png"/></a>
+        <a href="https://www.python.org/"><img style="max-width: 200px;" width="80%" src="https://www.python.org/static/opengraph-icon-200x200.png"/></a>
       </div>
       <div class="column_3">
-        <a href="https://www.mongodb.com/"><img width="100%" src="https://webassets.mongodb.com/_com_assets/cms/MongoDB-Logo-5c3a7405a85675366beb3a5ec4c032348c390b3f142f5e6dddf1d78e2df5cb5c.png"/></a>
+        <a href="http://hadoop.apache.org/"><img style="max-width: 200px;" width="80%" src="http://cloudtimes.org/wp-content/uploads/2013/06/hadoop-logo-square.jpg"/></a>
       </div>
       <div class="column_3">
-        <a href="http://pandas.pydata.org/"><img width="100%" src="http://pandas.pydata.org/_static/pandas_logo.png"/></a>
+        <a href="https://plot.ly/javascript/"><img style="max-width: 200px;" width="80%" src="https://avatars2.githubusercontent.com/u/5997976?v=3&s=400"/></a>
       </div>
     </div>
     <div class="row text center">
       <div class="column_3">
-        <a href="http://visjs.org/"><img width="100%" src="http://visjs.org/images/wall_small.png"/></a>
+        <a href="http://pandas.pydata.org/"><img style="max-width: 200px;" width="80%" src="http://pandas.pydata.org/_static/pandas_logo.png"/></a>
+      </div>
+      <div class="column_3">
+        <a href="http://visjs.org/"><img style="max-width: 200px;" width="80%" src="http://visjs.org/images/wall_small.png"/></a>
+      </div>
+      <div class="column_3">
+        <a href="http://www.numpy.org/"><img style="max-width: 200px;" width="80%" src="https://bids.berkeley.edu/sites/default/files/styles/400x225/public/projects/numpy_project_page.jpg?itok=flrdydei"/></a>
+      </div>
+      <div class="column_3">
+        <a href="http://opentsdb.net/"><img style="max-width: 200px;" width="80%" src="http://opentsdb.net/img/logo_header.png"/></a>
       </div>
     </div>
-    <hr/>
-  </section>
-  <section class="bck white padding text center">
-    <h2>Things we <strong>read</strong></h2>
-    <br/>
     <div class="row text center">
-      <div class="row text center">
-        <div class="column_4">
-          <p>Ledoit, Olivier, and Michael Wolf. "Improved estimation of the covariance matrix of stock returns with an application to portfolio selection." Journal of empirical finance 10.5 (2003): 603-621.</p>
-        </div>
-        <div class="row text center">
-          <div class="column_4">
-            <p>Huang, Jianhua Z., et al. "Covariance matrix selection and estimation via penalised normal likelihood." Biometrika 93.1 (2006): 85-98.</p>
-          </div>
-          <div class="row text center">
-            <div class="column_4">
-              <p>Witten, Daniela M., Robert Tibshirani, and Trevor Hastie. "A penalized matrix decomposition, with applications to sparse principal components and canonical correlation analysis." Biostatistics (2009): kxp008.</p>
-            </div>
-          </div>
+      <div class="column_3">
+        <a href="https://www.mongodb.com/"><img style="max-width: 200px;" width="80%" src="https://webassets.mongodb.com/_com_assets/cms/MongoDB-Logo-5c3a7405a85675366beb3a5ec4c032348c390b3f142f5e6dddf1d78e2df5cb5c.png"/></a>
+      </div>
+    </div>
   </section>
+
+  <section class="bck white text center">
+    <div class="row text center">
+      <h2>Things we <strong>read</strong></h2>
+    </div>
+    <div class="row science text center">
+      <div class="column_4">
+        <p><strong>Ledoit, Olivier, and Michael Wolf</strong> "Improved estimation of the covariance matrix of stock returns with an application to portfolio selection." Journal of empirical finance 10.5 (2003): 603-621.</p>
+      </div>
+      <div class="column_4">
+        <p><strong>Huang, Jianhua Z., et al.</strong> "Covariance matrix selection and estimation via penalised normal likelihood." Biometrika 93.1 (2006): 85-98.</p>
+      </div>
+      <div class="column_4">
+        <p><strong>Witten, Daniela M., Robert Tibshirani, and Trevor Hastie</strong> "A penalized matrix decomposition, with applications to sparse principal components and canonical correlation analysis." Biostatistics (2009): kxp008.</p>
+      </div>
+  </section>
+  
 </body>
 {% endblock %}

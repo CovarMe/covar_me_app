@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Kalam:400,700');
+
+/* Fonts */
+body {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 18px;
+}
+.science {
+  font-family: 'Kalam', sans-serif;
+}
+
+/* General Format Stuff */
+section {
+  padding-top: 45px;
+}
+.row {
+  padding-top: 25px;
+}
+
+/* Elements */
+a {
+  color: inherit;
+}
+a:hover {
+  color: rgb(41, 154, 168);
+  text-decoration: underline;
+}
+
+.success {
+  background-color: rgb(41, 154, 168);
+  color: white;
+}
+a.success {
+  color: white;
+}
+
+/* Utilities */
+strong {
+  font-weight: bold;
+}

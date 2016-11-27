@@ -8,18 +8,18 @@
   <link rel=stylesheet type=text/css href="{{ url_for('bower.static', filename='tuktuk/tuktuk.css') }}">
   <link rel=stylesheet type=text/css href="{{ url_for('bower.static', filename='tuktuk/tuktuk.grid.css') }}">
   <link rel=stylesheet type=text/css href="{{ url_for('bower.static', filename='tuktuk/tuktuk.icons.css') }}">
-  <link rel=stylesheet type=text/css href="{{ url_for('bower.static', filename='tuktuk/tuktuk.theme.default.css') }}">
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
   {% block top_imports %}{% endblock %}
 
   <div class="row">
     <div class="column_6">
-      <img src="http://emojis.slackmojis.com/emojis/images/1471119456/982/fiesta_parrot.gif?1471119456" class="logo on-left"/>
+      <a href="/"><img src="http://emojis.slackmojis.com/emojis/images/1471119456/982/fiesta_parrot.gif?1471119456" class="logo on-left"/></a>
       <h2><strong>&nbsp;&nbsp;Covar</strong>Me</h1>
     </div>
-      <nav class="column_6 text right">
+    <nav class="column_6 text right">
       <a href="/login" class="button"><span class="icon user"></span>Login</a>
       <a href="/register" class="button success bck theme"><span class="icon pencil"></span>Register</a>
-      </nav>
+    </nav>
   </div>
 </header>
 
@@ -40,6 +40,9 @@
   </section>
   {% block body %}{% endblock %}
 </div>
+
+<footer class="bck light center">
+</footer>
 
 <!-- All the javascript and css shit that gets loaded on the bottom -->
 <script src="{{ url_for('bower.static', filename='jquery/dist/jquery.min.js') }}"></script>
