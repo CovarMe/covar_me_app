@@ -109,24 +109,42 @@ Plotly.newPlot('covar-heatmap-graph', {{ data.charts.covar_heatmap|tojson }});
         <h2>Portfolio Network</h2>
         <div id="portfolio-network" style="width:100%;height:550px;"></div>
         <script type="text/javascript">
-// create an array with nodes
-var nodes = new vis.DataSet({{ data.charts.network.nodes|tojson }});
-
-// create an array with edges
-var edges = new vis.DataSet({{ data.charts.network.edges|tojson }});
-
-// create a network
 var container = document.getElementById('portfolio-network');
-
-// provide the data in the vis format
-var data = {
-  nodes: nodes,
-  edges: edges
+var network_data = {
+  nodes: new vis.DataSet({{ data.charts.network.nodes|tojson }}),
+  edges: new vis.DataSet({{ data.charts.network.edges|tojson }})
 };
-var options = {};
-
-// initialize your network!
-var network = new vis.Network(container, data, options);
+var network_options = {
+  physics: {
+    barnesHut: {
+      gravitationalConstant: -1000,
+      centralGravity: 0.1,
+      springLength: 95,
+      springConstant: 0.04,
+      damping: 0.09,
+      avoidOverlap: 0
+    },
+    repulsion: {
+      centralGravity: 0.1,
+      springLength: 200,
+      springConstant: 0.05,
+      nodeDistance: 200,
+      damping: 0.09
+    },
+  },
+  layout: {
+    improvedLayout: true
+  },
+  nodes: { 
+    color: 'rgb(41, 154, 168)',
+    font: {
+      color: 'white',
+      face: 'Josefin Sans'
+    } 
+  },
+  edges: { color: 'rgb(229, 229, 229)' }
+};
+var network = new vis.Network(container, network_data, network_options);
         </script>
 
       </div>
