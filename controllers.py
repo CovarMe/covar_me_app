@@ -90,7 +90,7 @@ def show_portfolio(username, portfolio_id):
     tickers = [s['ticker'] for s in portfolio.stocks]
     # retrieve the corresponding returns timelines as a dataframe
     returns = returns_as_dataframe(tickers, '5y-ago')
-    covar = matrix_greedy_heatmap_sorted(std_data('mtcars').index.tolist(),
+    covar = matrix_greedy_heatmap_sorted(["IUSG","VRNG","UGE","SPY","SPP","SPR","SPW","SPN","BSDM","SPA"],
                                          'covariance')
     # create chart data elements for all the different js charts 
     chart_data = {}
