@@ -87,14 +87,21 @@ def create_new_portfolio(username, name, tickers):
 
 def show_portfolio(username, portfolio_id):
     portfolio = get_portfolio(portfolio_id)
-    tickers = [s['ticker'] for s in portfolio.stocks]
+    # tickers = [s['ticker'] for s in portfolio.stocks]
+    tickers = ["IUSG","VRNG","UGE","SPY","SPP","SPR","SPW","SPN","BSDM","SPA"]
     # retrieve the corresponding returns timelines as a dataframe
     returns = returns_as_dataframe(tickers, '5y-ago')
-    covar = matrix_greedy_heatmap_sorted(["IUSG","VRNG","UGE","SPY","SPP","SPR","SPW","SPN","BSDM","SPA"],
-                                         'covariance')
+    means = calculate_mean_vector(returns)
+    # retrieve the corresponsing covariances
+    covar = read_mongodb_matrix(tickers, 'covariance')
+    # calculate return vs variance
+    for i in range(10):
+        print(calculate_wolf_weights(covar, means, float(i)/10))
+    # sort the covariance for the heatmap
+    covar_sorted = matrix_greedy_heatmap_sorted(covar)
     # create chart data elements for all the different js charts 
     chart_data = {}
-    chart_data['covar_heatmap'] = covar_heatmap_chart_model(covar)
+    chart_data['covar_heatmap'] = covar_heatmap_chart_model(covar_sorted)
     chart_data['ret_vs_var'] = ret_vs_var_chart_model(tickers)
     chart_data['noise'] = noise_chart_model(returns)
     chart_data['network'] = portfolio_network_chart_model(covar)
