@@ -95,8 +95,6 @@ def opentsdb_query(tickers, metrics, since):
 
 
 def create_mongodb_matrix(mat, tickers, matrix_name):
-    print(len(mat))
-    print(len(tickers))
     it = np.nditer(mat, flags=['f_index','multi_index'])
     while not it.finished:
         if it.multi_index[0] <= it.multi_index[1]:
