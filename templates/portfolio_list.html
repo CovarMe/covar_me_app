@@ -15,8 +15,7 @@
         <p>Select one of your portfolios below</p>
         <br/>
         {% for portfolio in portfolios %}
-        <a class="text bold" href="/portfolio/{{ name }}-{{ portfolio.id }}">{{ portfolio.name }}</a>
-        <br/>
+        <a class="button text bold portfolio" href="/portfolio/{{ name }}-{{ portfolio.id }}">{{ portfolio.name }}</a>
         {% endfor %}
       </div>
     </div>

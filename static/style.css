@@ -32,6 +32,15 @@ a:hover {
   text-decoration: underline;
 }
 
+a.portfolio {
+  padding:  25px 25px 25px 25px;
+  color: rgb(41, 154, 168);
+}
+a.portfolio:hover {
+  background-color: rgb(41, 154, 168);
+  color: white;
+}
+
 .success {
   background-color: rgb(41, 154, 168);
   color: white;
