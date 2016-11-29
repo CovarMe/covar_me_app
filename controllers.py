@@ -107,6 +107,7 @@ def show_portfolio(username, portfolio_id):
         'portfolio.html', 
         username = username,
         name = portfolio.name,
+        tickers = tickers,
         data = {
             'charts': chart_data
         })

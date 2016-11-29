@@ -25,5 +25,4 @@ def calculate_wolf_weights(covar, means, q):
     denom = (A * C - B ** 2)
     w = np.dot(np.dot((C - q * B) / denom, prec),ones) + \
             np.dot(np.dot((q * A - B) / denom, prec), means)
-    print(q)
     return w

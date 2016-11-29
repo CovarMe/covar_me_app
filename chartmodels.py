@@ -7,7 +7,7 @@ from db.mongo_schemata import *
 def ret_vs_var_chart_model(ret_vs_var):
     data = [{
         'y': ["%.2f" % float(e['ret']) for e in ret_vs_var], 
-        'x': ["%.2f" % float(abs(e['var'])) for e in ret_vs_var], 
+        'x': ["%.2f" % float(e['var']) for e in ret_vs_var], 
         'line': {'color': "rgb(0,100,80)"}, 
         'mode': "lines", 
         'name': "Ret vs. Risk", 
