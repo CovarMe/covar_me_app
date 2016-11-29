@@ -95,14 +95,13 @@ def show_portfolio(username, portfolio_id):
     # retrieve the corresponsing covariances
     covar = read_mongodb_matrix(tickers, 'covariance')
     # calculate return vs variance
-    for i in range(10):
-        print(calculate_wolf_weights(covar, means, float(i)/10))
+    ret_vs_var = ret_vs_var_data_model(covar, returns)
     # sort the covariance for the heatmap
     covar_sorted = matrix_greedy_heatmap_sorted(covar)
     # create chart data elements for all the different js charts 
     chart_data = {}
     chart_data['covar_heatmap'] = covar_heatmap_chart_model(covar_sorted)
-    chart_data['ret_vs_var'] = ret_vs_var_chart_model(tickers)
+    chart_data['ret_vs_var'] = ret_vs_var_chart_model(ret_vs_var)
     chart_data['noise'] = noise_chart_model(returns)
     chart_data['network'] = portfolio_network_chart_model(covar)
     return render_template(

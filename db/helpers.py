@@ -81,9 +81,10 @@ def opentsdb_query(tickers, metrics, since):
         print(response_content_dict)
         m = re.search("(?<=No\ such\ name\ for\ \'tagv\':\ \')[A-Za-z]*(?=\')",
                       response_content_dict['error']['message'])
-        Stock.objects(ticker = m.group(0)).first().delete()
-        tickers.remove(m.group(0))
-        return opentsdb_query(tickers, metrics, since)
+        if m != None:
+            Stock.objects(ticker = m.group(0)).first().delete()
+            tickers.remove(m.group(0))
+            return opentsdb_query(tickers, metrics, since)
 
     response_dict = response.json()
     if 'error' in response_dict:

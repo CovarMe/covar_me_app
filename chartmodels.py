@@ -4,15 +4,13 @@ import datetime
 from db.helpers import *
 from db.mongo_schemata import *
 
-def ret_vs_var_chart_model(tickers):
-    var = [math.log(i) for i in range(1,11)]
-    ret = range(1,10)
+def ret_vs_var_chart_model(ret_vs_var):
     data = [{
-        'x': ret, 
-        'y': var, 
+        'y': ["%.2f" % float(e['ret']) for e in ret_vs_var], 
+        'x': ["%.2f" % float(abs(e['var'])) for e in ret_vs_var], 
         'line': {'color': "rgb(0,100,80)"}, 
         'mode': "lines", 
-        'name': "Fair", 
+        'name': "Ret vs. Risk", 
         'type': "scatter"
     }]
     return data
@@ -61,7 +59,6 @@ def portfolio_network_chart_model(covar):
                 'to': covar.index.tolist()[it.multi_index[1]],
                 'value': "%.2f" % float(it[0])
             }
-            print edge
             data['edges'].append(edge)
 
         it.iternext()
