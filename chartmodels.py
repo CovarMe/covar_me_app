@@ -48,12 +48,16 @@ def covar_heatmap_chart_model(covar):
     return data
 
 
-def portfolio_network_chart_model(covar):
+def portfolio_network_chart_model(covar, standardise = True):
+    if standardise == True:
+        covar = (covar - np.mean(covar, axis = 0)) \
+                / np.std(covar, axis=0)
+
     data = {'nodes':[], 'edges':[]}
     data['nodes'] = map(lambda x: {'id':x,'label':x}, set(covar.index.tolist()))
     it = np.nditer(covar, flags=['f_index','multi_index'])
     while not it.finished:
-        if it.multi_index[0] < it.multi_index[1] and it[0] > 2:
+        if it.multi_index[0] < it.multi_index[1] and abs(it[0]) > 1:
             edge = {
                 'from': covar.index.tolist()[it.multi_index[0]],
                 'to': covar.index.tolist()[it.multi_index[1]],

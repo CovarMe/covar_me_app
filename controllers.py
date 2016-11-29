@@ -87,8 +87,7 @@ def create_new_portfolio(username, name, tickers):
 
 def show_portfolio(username, portfolio_id):
     portfolio = get_portfolio(portfolio_id)
-    # tickers = [s['ticker'] for s in portfolio.stocks]
-    tickers = ["IUSG","VRNG","UGE","SPY","SPP","SPR","SPW","SPN","BSDM","SPA"]
+    tickers = [s['ticker'] for s in portfolio.stocks]
     # retrieve the corresponding returns timelines as a dataframe
     returns = returns_as_dataframe(tickers, '5y-ago')
     means = calculate_mean_vector(returns)

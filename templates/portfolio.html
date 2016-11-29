@@ -24,30 +24,33 @@
         <h2>Return vs. Risk</h2>
         <div id="ret-vs-var-graph" style="width:100%;height:550px;"></div>
         <script>
+var ret_vs_var_data = {{ data.charts.ret_vs_var|tojson }}
 var layout = {
   paper_bgcolor: "rgb(255,255,255)", 
   plot_bgcolor: "rgb(229,229,229)", 
   xaxis: {
+    title: 'Associated Risk',
     gridcolor: "rgb(255,255,255)", 
-    range: [1, 10], 
+    range: [0, 1], 
     showgrid: true, 
     showline: false, 
     showticklabels: true, 
     tickcolor: "rgb(127,127,127)", 
     ticks: "outside", 
-    zeroline: false
+    zeroline: true
   }, 
   yaxis: {
+    title: 'Expected Return',
     gridcolor: "rgb(255,255,255)", 
     showgrid: true, 
     showline: false, 
     showticklabels: true, 
     tickcolor: "rgb(127,127,127)", 
     ticks: "outside", 
-    zeroline: false
+    zeroline: true
   }
 };
-Plotly.plot('ret-vs-var-graph', {{ data.charts.ret_vs_var|tojson }}, layout);
+Plotly.plot('ret-vs-var-graph', ret_vs_var_data, layout);
         </script>
       </div>
     </div>
