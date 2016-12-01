@@ -103,7 +103,8 @@ Plotly.plot('noise-graph', {{ data.charts.noise|tojson }}, layout);
         <h2>Portfolio Covariance</h2>
         <div id="covar-heatmap-graph" style="width:100%;height:550px;"></div>
         <script>
-Plotly.newPlot('covar-heatmap-graph', {{ data.charts.covar_heatmap|tojson }});
+var heatmap_data = {{ data.charts.covar_heatmap|tojson }}
+Plotly.newPlot('covar-heatmap-graph', heatmap_data);
         </script>
       </div>
     </div>
