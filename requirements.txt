@@ -10,3 +10,4 @@ itsdangerous
 click
 pandas
 numpy
+requests

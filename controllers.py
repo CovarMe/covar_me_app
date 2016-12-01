@@ -17,6 +17,9 @@ def show_homepage():
                            name = random.choice(names))
 
 
+def show_about():
+    return render_template('about.html')
+
 def show_registration_form():
     return render_template('registration.html')
 
