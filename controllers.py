@@ -10,7 +10,8 @@ names = ["Donald","Yoda","LeBron James",
          "Theme", "Davide", "David", 
          "Jonas", "Santi", "World", 
          "Insect Overlords"]
-with open("/home/santi/Desktop/covar_me_data_analysis/proove-copy-copy.html") as f:
+
+with open(os.environ.get('PRESENTATION')) as f:
     rmdhtml = f.read().decode('utf-8')
 
 def show_homepage():
