@@ -33,7 +33,7 @@ def home_page():
 
 @app.route('/about')
 def about():
-    return show_homepage() 
+    return show_about() 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
