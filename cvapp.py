@@ -31,6 +31,10 @@ def home_page():
     return show_homepage() 
 
 
+@app.route('/about')
+def about():
+    return show_about() 
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':

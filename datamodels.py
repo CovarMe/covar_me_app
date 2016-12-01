@@ -3,7 +3,6 @@ import pandas as pd
 from db.helpers import *
 from calculations import *
 from pprint import pprint
-from pydataset import data as std_data
 
 
 def returns_as_dataframe(tickers, since = '1y-ago'):

@@ -10,12 +10,18 @@ names = ["Donald","Yoda","LeBron James",
          "Theme", "Davide", "David", 
          "Jonas", "Santi", "World", 
          "Insect Overlords"]
-
+with open("/home/santi/Desktop/covar_me_data_analysis/proove-copy-copy.html") as f:
+    rmdhtml = f.read().decode('utf-8')
 
 def show_homepage():
     return render_template('index.html', 
                            name = random.choice(names))
 
+
+def show_about():
+    print rmdhtml
+    return render_template('about.html',
+                           rmdhtml = rmdhtml)
 
 def show_registration_form():
     return render_template('registration.html')
