@@ -123,5 +123,6 @@ def read_mongodb_matrix(tickers, matrix_name):
         matrix.set_value(mi.i, mi.j, mi.v)
         matrix.set_value(mi.j, mi.i, mi.v)
 
+    matrix = matrix.round(6)
     return matrix
 
