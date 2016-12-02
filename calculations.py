@@ -30,4 +30,4 @@ def calculate_wolf_weights(covar, means, q):
     # print glasso
     w = np.dot(np.dot((C - q * B) / denom, prec),ones) + \
             np.dot(np.dot((q * A - B) / denom, prec), means)
-    return w
+    return np.matrix(w).transpose()

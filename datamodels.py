@@ -40,12 +40,12 @@ def matrix_greedy_heatmap_sorted(data):
 
 def ret_vs_var_data_model(covar, returns):
     breaks = 20
-    means = calculate_mean_vector(returns)
+    means = calculate_mean_vector(returns) * 100
     data = [(0,0)] * breaks
     for i in range(breaks):
-        q = float(i) / breaks
+        q = float(i) / breaks * 100
         weights = calculate_wolf_weights(covar, means, q)
-        var = np.dot(weights, np.diagonal(covar))
+        var = np.dot(np.dot(weights.transpose(), covar), weights)
         data[i] = {'ret': q, 
                    'var': var, 
                    'weights': weights,

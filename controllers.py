@@ -20,9 +20,7 @@ def show_homepage():
 
 
 def show_about():
-    print rmdhtml
-    return render_template('about.html',
-                           rmdhtml = rmdhtml)
+    return render_template('about.html')
 
 def show_registration_form():
     return render_template('registration.html')
@@ -94,6 +92,9 @@ def create_new_portfolio(username, name, tickers):
 
 def show_portfolio(username, portfolio_id):
     portfolio = get_portfolio(portfolio_id)
+    # TODO: Hack for presentation, remove afterwards
+    portfolio.stocks = [s for s in portfolio.stocks if type(s) is Stock]
+    portfolio.save()
     tickers = [s['ticker'] for s in portfolio.stocks]
     # retrieve the corresponding returns timelines as a dataframe
     returns = returns_as_dataframe(tickers, '5y-ago')
