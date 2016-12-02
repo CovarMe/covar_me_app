@@ -117,7 +117,8 @@ def show_portfolio(username, portfolio_id):
         name = portfolio.name,
         tickers = tickers,
         data = {
-            'charts': chart_data
+            'charts': chart_data,
+            'table': zip(tickers, np.round(means,3))
         })
 
 

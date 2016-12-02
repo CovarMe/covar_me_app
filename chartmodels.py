@@ -57,11 +57,12 @@ def portfolio_network_chart_model(covar, standardise = True):
     data['nodes'] = map(lambda x: {'id':x,'label':x}, set(covar.index.tolist()))
     it = np.nditer(covar, flags=['f_index','multi_index'])
     while not it.finished:
-        if it.multi_index[0] < it.multi_index[1] and abs(it[0]) > 1:
+        if it.multi_index[0] < it.multi_index[1] and abs(it[0]) > 0.5:
             edge = {
                 'from': covar.index.tolist()[it.multi_index[0]],
                 'to': covar.index.tolist()[it.multi_index[1]],
-                'value': "%.2f" % float(it[0])
+                'value': "%.2f" % float(abs(it[0])),
+                'color': 'green' if it[0] > 0 else 'red'
             }
             data['edges'].append(edge)
 

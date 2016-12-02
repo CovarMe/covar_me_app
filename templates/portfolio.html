@@ -14,8 +14,7 @@
 
   <section class="bck white padding text center">
     <h1>Hello {{ username }}!</h1>
-    <p>Stats for your portfolio: {{ name }}</p>
-    <p>Companies: {% for ticker in tickers %} {{ ticker }}, {% endfor %}</p>
+    <h2>Portfolio: {{ name }}</h2>
   </section>
 
   <section class="bck white padding text center">
@@ -25,7 +24,7 @@
         <h2>Return vs. Risk</h2>
         <div id="ret-vs-var-graph" style="width:100%;height:550px;"></div>
         <script>
-var ret_vs_var_data = {{ data.charts.ret_vs_var|tojson }}
+var ret_vs_var_chart_data = {{ data.charts.ret_vs_var|tojson }}
 var layout = {
   paper_bgcolor: "rgb(255,255,255)", 
   plot_bgcolor: "rgb(229,229,229)", 
@@ -52,11 +51,23 @@ var layout = {
     zeroline: true
   }
 };
-Plotly.plot('ret-vs-var-graph', ret_vs_var_data, layout);
+Plotly.plot('ret-vs-var-graph', ret_vs_var_chart_data, layout);
         </script>
-        <div id="ret-vs-var-table" style="width:100%;height:550px;"></div>
-        <script>
-        </script>
+      </div>
+    </div>
+    <div class="row padding-bottom">
+      <div class="column_10 offset_1">
+        <h2>Stock Mean Returns</h2>
+        {% for stock in data.table %}
+        <div class="row">
+          <div class="column_3">
+            {{ stock[0] }}
+          </div>
+          <div class="column_3">
+            {{ stock[1] }}%
+          </div>
+        </div>
+        {% endfor %}
       </div>
     </div>
   </section>

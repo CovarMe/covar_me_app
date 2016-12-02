@@ -49,6 +49,7 @@ def ret_vs_var_data_model(covar, returns):
         data[i] = {'ret': q, 
                    'var': var, 
                    'weights': weights,
-                   'returns': means}
+                   'returns': means.tolist(),
+                   'tickers': covar.index.tolist()}
 
     return data
