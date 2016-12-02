@@ -3,7 +3,7 @@
 {% block body %}
 <body>
   <section class="bck white padding">
-    {{ rmdhtml|safe }}
+    <iframe width="100%" height="2050px" src="{{ url_for('static', filename='presentation.html') }}"></iframe>
   </section>
 </body>
 {% endblock %}
