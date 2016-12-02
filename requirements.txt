@@ -11,3 +11,5 @@ click
 pandas
 numpy
 requests
+sklearn
+scipy
