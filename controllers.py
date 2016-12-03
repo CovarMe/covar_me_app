@@ -101,6 +101,7 @@ def show_portfolio(username, portfolio_id):
     means = calculate_mean_vector(returns)
     # retrieve the corresponsing covariances
     covar = read_mongodb_matrix(tickers, 'covariance')
+    print covar
     # calculate return vs variance
     ret_vs_var = ret_vs_var_data_model(covar, returns)
     # sort the covariance for the heatmap

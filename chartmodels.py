@@ -62,10 +62,13 @@ def portfolio_network_chart_model(covar, standardise = True):
                 'from': covar.index.tolist()[it.multi_index[0]],
                 'to': covar.index.tolist()[it.multi_index[1]],
                 'value': "%.2f" % float(abs(it[0])),
-                'color': 'green' if it[0] > 0 else 'red'
+                'color': '#cad49d' if it[0] > 0 else '#c89fa3'
             }
             data['edges'].append(edge)
 
         it.iternext()
+
+    if len(data['edges']) > 50:
+      data['edges'] = [e for e in data['edges'] if e['color'] == '#cad49d']
 
     return data

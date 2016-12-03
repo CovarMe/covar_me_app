@@ -23,7 +23,7 @@ def check_user(username):
 
 def auth_user(email, password):
     u = User.objects(email = email,
-                password = password).first()
+                     password = password).first()
     if u == None:
         return False
     else:
@@ -78,12 +78,15 @@ def opentsdb_query(tickers, metrics, since):
     response = requests.post(request_url, data = json.dumps(request_data))
     if not response.ok:
         response_content_dict = json.loads(response.content)
-        print(response_content_dict)
-        m = re.search("(?<=No\ such\ name\ for\ \'tagv\':\ \')[A-Za-z]*(?=\')",
-                      response_content_dict['error']['message'])
+        rxt = "(?<=No\ such\ name\ for\ \'tagv\':\ \')[A-Za-z]*(?=\')"
+        rxm = "(?<=No\ such\ name\ for\ \'metrics\':\ \')[A-Za-z]*(?=\.return\')"
+        rx = re.compile("(" + rxt + "|" + rxm + ")")
+        m = re.search(rx ,response_content_dict['error']['message'])
+        print response_content_dict
         if m != None:
             Stock.objects(ticker = m.group(0)).first().delete()
             tickers.remove(m.group(0))
+            print m
             return opentsdb_query(tickers, metrics, since)
 
     response_dict = response.json()
@@ -116,10 +119,13 @@ def read_mongodb_matrix(tickers, matrix_name):
                              matrix_name = matrix_name)
     n = len(tickers)
     available_tickers = set([mi.i for mi in mis])
-    matrix = pd.DataFrame(np.empty([n, n]),
-                             index = tickers,
-                             columns = tickers)
+    matrix = pd.DataFrame(np.absolute(np.random.normal(0, 0.001, [n, n])),
+                          index = tickers,
+                          columns = tickers)
     for mi in mis:
+        if abs(mi.v) > 10:
+            mi.v = abs(np.random.normal(0,0.001))
+
         matrix.set_value(mi.i, mi.j, mi.v)
         matrix.set_value(mi.j, mi.i, mi.v)
 

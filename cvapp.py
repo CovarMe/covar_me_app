@@ -16,7 +16,7 @@ load_dotenv(dotenv_path)
 
 # create a Flask application
 app = Flask(__name__)
-app.secret_key = os.environ.get('SECRET_KEY')
+app.secret_key = 'santidaviddavidejonas'
 
 # inject bower (for front-end resource management)
 Bower(app)
@@ -88,4 +88,4 @@ def test():
 
 
 # start application
-app.run(host = '0.0.0.0')
+app.run(host = '0.0.0.0', port = 80)

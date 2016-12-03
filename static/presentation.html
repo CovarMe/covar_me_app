@@ -130,13 +130,13 @@ $(document).ready(function () {
 </div>
 <div id="data-introduction" class="section level3">
 <h3>Data introduction</h3>
-<p>The data we have used was obtained from the Wharton database. The primary components used from this data were:</p>
+<p>The data we have used was obtained from the Wharton database and is periodically updated using the Yahoo Finance API. The primary components used from this data were:</p>
 <ul>
-<li>US Stock returns from 2010-2015, including &lt; &gt; companies</li>
+<li>US Stock returns from 2010-2015, including 8000 companies</li>
 <li>US Treasury bond returns</li>
 <li>SIC codes</li>
 </ul>
-<p>The returns were calculated according to $ $.</p>
+<p>The returns were calculated according to <span class="math inline">\(r(t)=\frac{p(t)f(t) + d(t)}{p(t')}-1\)</span></p>
 </div>
 <div id="the-application" class="section level3">
 <h3>The Application</h3>
@@ -197,7 +197,7 @@ R_i - R_f \sim (R_m - R_f)
 \]</span></p>
 <p>Then <span class="math display">\[ cov(R_i,R_j) =  cov(\beta_i R_m + e_i, \beta_j R_m +e_j) = \beta_i \beta_j var(R_m) + cov(e_i,e_j)\]</span> If <span class="math display">\[i \neq j \rightarrow cov(e_i,e_j) = 0\]</span> Therefore the covariance matrix is</p>
 <p><span class="math display">\[
-F = \sigma_{m}\beta \beta' + D    
+F = \sigma_{m}^2\beta \beta' + D    
 \]</span></p>
 </div>
 <div id="wolf-and-ledoit" class="section level3">
