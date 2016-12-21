@@ -5,20 +5,13 @@ from db.helpers import *
 from chartmodels import *
 from datamodels import *
 
-import random
-names = ["Donald","Yoda","LeBron James", 
-         "Theme", "Davide", "David", 
-         "Jonas", "Santi", "World", 
-         "Insect Overlords"]
 
 if os.environ.get('PRESENTATION') != None:
     with open(os.environ.get('PRESENTATION')) as f:
         rmdhtml = f.read().decode('utf-8')
 
 def show_homepage():
-    return render_template('index.html', 
-                           name = random.choice(names))
-
+    return render_template('index.html')
 
 def show_about():
     return render_template('about.html')
