@@ -34,21 +34,22 @@ def calculate_wolf_weights(covar, means, q):
     return np.matrix(w).transpose()
 
 
-def calculate_correlation_matrix(covar):
+def calculate_residual_correlation_matrix(returns):
     # find the market return constraining on the selected companies (first PCA)
     # regress each stock on that and find correlation of residuals
+    returns_matrix = returns.as_matrix().transpose()
+    covar_matrix = np.cov(returns_matrix)
     pca = decomposition.PCA(n_components=1)
-    pca.fit(covar)
-    X = pca.transform(covar)
+    pca.fit(covar_matrix)
+    X = pca.transform(covar_matrix)
     regr = linear_model.LinearRegression()
-    dim = covar.shape[1]
-    res = numpy.zeros(shape=(dim,dim))
-
+    dim = covar_matrix.shape[1]
+    res = np.zeros(shape=(dim,dim))
     for x in range(0, dim):
         regr = linear_model.LinearRegression()
-        regr = regr.fit(X, covar[:,x])
-        res[:,x] = covar[:,x] - regr.predict(X)
+        regr = regr.fit(X, covar_matrix[:,x])
+        res[:,x] = covar_matrix[:,x] - regr.predict(X)
 
     res_corr = np.corrcoef(res)
-    return res_corr
+    return pd.DataFrame(res_corr, index = returns.columns, columns = returns.columns)
 

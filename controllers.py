@@ -101,18 +101,17 @@ def show_portfolio(username, portfolio_id):
     means = calculate_mean_vector(returns)
     # retrieve the corresponsing covariances
     covar = read_mongodb_matrix(tickers, 'covariance')
-    correl = calculate_correlation_matrix(covar)
-    print correl
+    resid_correl = calculate_residual_correlation_matrix(returns.fillna(0))
     # calculate return vs variance
     ret_vs_var = ret_vs_var_data_model(covar, returns)
     # sort the covariance for the heatmap
-    covar_sorted = matrix_greedy_heatmap_sorted(covar)
+    resid_correl_sorted = matrix_greedy_heatmap_sorted(resid_correl)
     # create chart data elements for all the different js charts 
     chart_data = {}
     chart_data['covar_heatmap'] = covar_heatmap_chart_model(covar_sorted)
     chart_data['ret_vs_var'] = ret_vs_var_chart_model(ret_vs_var)
     chart_data['noise'] = noise_chart_model(returns)
-    chart_data['network'] = portfolio_network_chart_model(correl)
+    chart_data['network'] = portfolio_network_chart_model(resid_correl)
     return render_template(
         'portfolio.html', 
         username = username,
