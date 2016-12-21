@@ -101,7 +101,8 @@ def show_portfolio(username, portfolio_id):
     means = calculate_mean_vector(returns)
     # retrieve the corresponsing covariances
     covar = read_mongodb_matrix(tickers, 'covariance')
-    print covar
+    correl = calculate_correlation_matrix(covar)
+    print correl
     # calculate return vs variance
     ret_vs_var = ret_vs_var_data_model(covar, returns)
     # sort the covariance for the heatmap
@@ -111,7 +112,7 @@ def show_portfolio(username, portfolio_id):
     chart_data['covar_heatmap'] = covar_heatmap_chart_model(covar_sorted)
     chart_data['ret_vs_var'] = ret_vs_var_chart_model(ret_vs_var)
     chart_data['noise'] = noise_chart_model(returns)
-    chart_data['network'] = portfolio_network_chart_model(covar)
+    chart_data['network'] = portfolio_network_chart_model(correl)
     return render_template(
         'portfolio.html', 
         username = username,
