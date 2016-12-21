@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from sklearn.covariance import graph_lasso
+from sklearn import decomposition, datasets, linear_model
 
 
 def calculate_mean_vector(returns):
@@ -30,5 +31,24 @@ def calculate_wolf_weights(covar, means, q):
     # print glasso
     w = np.dot(np.dot((C - q * B) / denom, prec),ones) + \
             np.dot(np.dot((q * A - B) / denom, prec), means)
-    w = np.matrix(w).transpose()
-    return w
+    return np.matrix(w).transpose()
+
+
+def calculate_correlation_matrix(covar):
+    # find the market return constraining on the selected companies (first PCA)
+    # regress each stock on that and find correlation of residuals
+    pca = decomposition.PCA(n_components=1)
+    pca.fit(covar)
+    X = pca.transform(covar)
+    regr = linear_model.LinearRegression()
+    dim = covar.shape[1]
+    res = numpy.zeros(shape=(dim,dim))
+
+    for x in range(0, dim):
+        regr = linear_model.LinearRegression()
+        regr = regr.fit(X, covar[:,x])
+        res[:,x] = covar[:,x] - regr.predict(X)
+
+    res_corr = np.corrcoef(res)
+    return res_corr
+
