@@ -31,3 +31,26 @@ def calculate_wolf_weights(covar, means, q):
     w = np.dot(np.dot((C - q * B) / denom, prec),ones) + \
             np.dot(np.dot((q * A - B) / denom, prec), means)
     return np.matrix(w).transpose()
+
+from sklearn import decomposition
+import numpy as np
+from sklearn import datasets, linear_model
+
+
+
+def pca(covar)
+    pca = decomposition.PCA(n_components=1)
+    pca.fit(covar)
+    X = pca.transform(covar)
+    regr = linear_model.LinearRegression()
+    dim = covar.shape[1]
+    res = numpy.zeros(shape=(dim,dim))
+
+   for x in range(0, dim):
+      regr = linear_model.LinearRegression()
+      regr = regr.fit(X, covar[:,x])
+      res[:,x] = covar[:,x] - regr.predict(X)
+
+      res_corr = np.corrcoef(res)
+      return res_corr
+
