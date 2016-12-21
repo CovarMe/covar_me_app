@@ -26,7 +26,7 @@ connect(host='mongodb://' + os.environ.get('MONGO_HOST') + '/' + os.environ.get(
 from controllers import *
 from stats_update import *
 
-background_update_stats()
+# background_update_stats()
 
 
 @app.route('/')

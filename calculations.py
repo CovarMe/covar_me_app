@@ -25,13 +25,16 @@ def calculate_wolf_weights(covar, means, q):
     B = np.dot(np.dot(ones.transpose(), prec), means)
     C = np.dot(np.dot(means.transpose(), prec), means)
     denom = (A * C - B ** 2)
-    # glasso trials
-    # glasso = graph_lasso(covar.as_matrix(), 0.48, 
-    #                      verbose = True, mode = 'cd')
-    # print glasso
     w = np.dot(np.dot((C - q * B) / denom, prec),ones) + \
             np.dot(np.dot((q * A - B) / denom, prec), means)
     return np.matrix(w).transpose()
+
+
+def shrink_matrix(matrix):
+    # glasso in run time to shrink the matrix for the network graph
+    glasso = graph_lasso(matrix.as_matrix(), 0.4, 
+                         verbose = True, mode = 'cd')
+    return pd.DataFrame(glasso[0], index = matrix.index, columns = matrix.index)
 
 
 def calculate_residual_correlation_matrix(returns):
