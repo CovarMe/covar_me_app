@@ -141,6 +141,12 @@ def read_mongodb_matrix(tickers, matrix_name):
 def update_stock_status(ticker, status):
   stock = Stock.objects(ticker = ticker
                      ).update_one(set__status_ts = status['ts'],
-                                  set__status_cov = status['cov'], 
+                                  set__status_cov = status['cov'],
+                                  set__dps = status['dps'],
                                   upsert = True)
   return stock
+
+
+def get_matrix_size(matrix_name):
+  nitems = len(MatrixItem.objects(matrix_name = matrix_name))
+  return nitems * 2

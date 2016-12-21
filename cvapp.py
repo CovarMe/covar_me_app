@@ -85,6 +85,11 @@ def portfolio(username, portfolio_id):
     return show_portfolio(username, portfolio_id)
 
 
+@app.route('/database')
+def database():
+    return show_database_stats()
+
+
 @app.route('/test')
 def test():
     return matrix_test()

@@ -18,6 +18,7 @@ def update_stats():
             res_ticker = metric['tags']['company']
             if ticker == res_ticker:
                 status['ts'] = 'available'
+                status['dps'] = len(ts)
 
         elif db_res['error'] == 'Missing queries' \
                 or db_res['error'] == 'Empty response.':

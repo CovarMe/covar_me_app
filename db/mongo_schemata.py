@@ -5,6 +5,7 @@ class Stock(Document):
     ticker = StringField(required = True, max_length = 8)
     status_ts = StringField(required = True, max_length = 16)
     status_cov = StringField(required = True, max_length = 16)
+    dps = IntField()
 
 
 class Portfolio(Document):
