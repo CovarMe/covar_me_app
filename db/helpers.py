@@ -9,8 +9,13 @@ opentsdb_url = "http://" \
     + "/api/"
 
 
-def get_ticker_list(q = ''):
-  tickers = [stock['ticker'] for stock in Stock.objects(ticker__contains = q)]
+def get_ticker_list(filtered = True):
+  if filtered:
+    stocks = Stock.objects(status_ts ='available', status_cov = 'available')
+  else:
+    stocks = Stock.objects(ticker__contains= '')
+
+  tickers = [stock['ticker'] for stock in stocks if type(stock['ticker'])]
   return sorted(tickers)
 
 
@@ -133,9 +138,9 @@ def read_mongodb_matrix(tickers, matrix_name):
     return matrix
 
 
-def update_stat(ticker, status):
-  stat = Stat.objects(ticker = ticker
+def update_stock_status(ticker, status):
+  stock = Stock.objects(ticker = ticker
                      ).update_one(set__status_ts = status['ts'],
                                   set__status_cov = status['cov'], 
                                   upsert = True)
-  return stat
+  return stock

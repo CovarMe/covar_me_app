@@ -78,7 +78,9 @@ def show_portfolio_list(username):
 
 
 def show_new_portfolio_form(username):
-    tickers = get_ticker_list()
+    tickers = get_ticker_list({
+        status_ts: 'available',
+        status_cov: 'available'})
     return render_template('new_portfolio.html',
                            username = username,
                            tickers = tickers)
@@ -93,9 +95,6 @@ def create_new_portfolio(username, name, tickers):
 
 def show_portfolio(username, portfolio_id):
     portfolio = get_portfolio(portfolio_id)
-    # TODO: Hack for presentation, remove afterwards
-    portfolio.stocks = [s for s in portfolio.stocks if type(s) is Stock]
-    portfolio.save()
     tickers = [s['ticker'] for s in portfolio.stocks]
     # retrieve the corresponding returns timelines as a dataframe
     returns = returns_as_dataframe(tickers, '5y-ago')

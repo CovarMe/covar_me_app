@@ -3,6 +3,8 @@ from mongoengine import *
 
 class Stock(Document):
     ticker = StringField(required = True, max_length = 8)
+    status_ts = StringField(required = True, max_length = 16)
+    status_cov = StringField(required = True, max_length = 16)
 
 
 class Portfolio(Document):
@@ -23,9 +25,3 @@ class MatrixItem(Document):
     j = StringField(required = True, max_length = 8)
     v = FloatField(required = True)
     matrix_name = StringField(max_length = 64, unique_with = ['i','j'])
-
-
-class Stat(Document):
-    ticker = StringField(required = True, max_length = 8, unique = True)
-    status_ts = StringField(required = True, max_length = 16)
-    status_cov = StringField(required = True, max_length = 16)

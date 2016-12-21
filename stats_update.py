@@ -8,7 +8,7 @@ def background_update_stats():
 
 
 def update_stats():
-    tickers = get_ticker_list()
+    tickers = get_ticker_list(filtered = False)
     for ticker in tickers:
         status = {}
         db_res = opentsdb_query([ticker], ['return'], '5y-ago')
@@ -33,4 +33,6 @@ def update_stats():
         else:
             status['cov'] = 'missing'
 
-        update_stat(ticker, status)
+        update_stock_status(ticker, status)
+        print(ticker)
+        print(status)
