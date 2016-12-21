@@ -27,5 +27,5 @@ class MatrixItem(Document):
 
 class Stat(Document):
     ticker = StringField(required = True, max_length = 8, unique = True)
-    status_opentsdb = StringField(required = True, max_length = 8)
-    status_mongo = StringField(required = True, max_length = 8)
+    status_ts = StringField(required = True, max_length = 16)
+    status_cov = StringField(required = True, max_length = 16)
