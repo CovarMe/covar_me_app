@@ -11,8 +11,9 @@ names = ["Donald","Yoda","LeBron James",
          "Jonas", "Santi", "World", 
          "Insect Overlords"]
 
-with open(os.environ.get('PRESENTATION')) as f:
-    rmdhtml = f.read().decode('utf-8')
+if os.environ.get('PRESENTATION') != None:
+    with open(os.environ.get('PRESENTATION')) as f:
+        rmdhtml = f.read().decode('utf-8')
 
 def show_homepage():
     return render_template('index.html', 

@@ -24,3 +24,8 @@ class MatrixItem(Document):
     v = FloatField(required = True)
     matrix_name = StringField(max_length = 64, unique_with = ['i','j'])
 
+
+class Stat(Document):
+    ticker = StringField(required = True, max_length = 8, unique = True)
+    status_opentsdb = StringField(required = True, max_length = 8)
+    status_mongo = StringField(required = True, max_length = 8)

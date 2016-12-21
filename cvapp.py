@@ -24,6 +24,9 @@ Bower(app)
 connect(host='mongodb://' + os.environ.get('MONGO_HOST') + '/' + os.environ.get('MONGO_DBNAME'))
 
 from controllers import *
+from stats_update import *
+
+update_stats()
 
 
 @app.route('/')
