@@ -7,13 +7,18 @@
 {% block body %}
 <body>
 
-  <section class="bck white text center">
-    <h1>Welcome to <strong>Covar</strong>Me</h1>
-    <div class="row text center">
+  <section class="bck white text">
+    <h1 class="text center">Welcome to <strong>Covar</strong>Me</h1>
+    <div class="row text">
       <div class="column_8 offset_2">
         <p>The database currently tracks <span class='science'>{{ tickers_total }}</span> stocks out of which <span class='science'>{{ tickers_available }}</span> are currently fully up-to-date and available for calculations</p>
+        <br>
         <p>To serve the estimated covariance values more quickly, the application currently stores <span class='science'>{{ matrix_items_stored }}</span> individual covariances between companies in a specifically designed matrix database.</p>
-        <p><a href="register" class="button success large margin-top">Create Portfolio</a></p>
+        <br>
+        <p>The database runs on a seperate server that is connected to the app server through a VPN connection. That other server runs a 'pseudo' Hadoop cluster with one name and one datanode. The time-series database <a href="http://opentsdb.net/">OpenTSDB</a> runs on top of HBase which runs on the HAdoop distributed file system. Everything is yeld together by <a href='http://hortonworks.com/apache/yarn/'>YARN</a> and <a href='https://zookeeper.apache.org/'>Zookeeper</a>.</p>
+        <br>
+        <p>This server (the app server) is just a Micro-size AWS instance with 1 GB of Memory and a single-core processor. The database server, however, is a multicore system and houses the MongoDB as well ass the Hadoop file system. Unfortunately, the network communication is not 100% stable because the VPN connection isn't perfect. But no server that was able to run the desired software was affordable.</p>
+        <p class="text center"><a href="register" class="button success large margin-top">Create Portfolio</a></p>
       </div>
     </div>
   </section>

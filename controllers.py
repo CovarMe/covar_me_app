@@ -121,7 +121,7 @@ def show_database_stats():
     return render_template('database.html',
                            tickers_available = tickers_available,
                            tickers_total = tickers_total,
-                           matrix_items_stored = matrix_items_stores)
+                           matrix_items_stored = matrix_items_stored)
 
 
 # TODO

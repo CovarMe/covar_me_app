@@ -148,5 +148,5 @@ def update_stock_status(ticker, status):
 
 
 def get_matrix_size(matrix_name):
-  nitems = len(MatrixItem.objects(matrix_name = matrix_name))
+  nitems = MatrixItem.objects(matrix_name = matrix_name).count()
   return nitems * 2
