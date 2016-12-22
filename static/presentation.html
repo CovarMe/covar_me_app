@@ -153,6 +153,15 @@ $(document).ready(function () {
 <li>A plot of expected return vs risk</li>
 <li>Summary statistics</li>
 </ul>
+<p>The plots are in total 4:</p>
+<ul>
+<li>Volatility VS daily returns</li>
+<li>Historical volatility of the stocks</li>
+<li>Correlation matrix among the stocks</li>
+<li>Graph of partial correlation</li>
+</ul>
+<p>Partial correlations are computed by extracting the first principal components from the covariance matrix of the selected stock and regress the returns of each stock on the first PC. The correlation matrix showed is the one of the residuals. To add some sparsity to it we used Graphical Lasso with a small tuning parameter.
+Green edges correspond to positive correlation, conditional on the overall correlation of the stocks and red edges correspond to negative correlation.</p>
 </div>
 <div id="theoretical-background" class="section level2">
 <h2>Theoretical background</h2>
