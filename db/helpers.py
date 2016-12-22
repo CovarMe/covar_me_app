@@ -119,6 +119,7 @@ def read_mongodb_matrix(tickers, matrix_name):
                              matrix_name = matrix_name)
     n = len(tickers)
     available_tickers = set([mi.i for mi in mis])
+    random.seed(n)
     a = np.absolute(np.random.normal(0, 0.001, [n, n]))
     a_triu = np.triu(a, k=0)
     a_tril = np.tril(a, k=0)
