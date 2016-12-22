@@ -129,7 +129,7 @@ def read_mongodb_matrix(tickers, matrix_name):
                           columns = tickers)
     for mi in mis:
         if abs(mi.v) > 10:
-            mi.v = abs(np.random.normal(0,0.001))
+            mi.v = 0.001
 
         matrix.set_value(mi.i, mi.j, mi.v)
         matrix.set_value(mi.j, mi.i, mi.v)
