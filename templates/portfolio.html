@@ -111,7 +111,7 @@ Plotly.plot('noise-graph', {{ data.charts.noise|tojson }}, layout);
     <!-- Portfolio Covariance Heatmap -->
     <div class="row padding-bottom">
       <div class="column_10 offset_1">
-        <h2>Portfolio Covariance</h2>
+        <h2>Portfolio Partial Correlations</h2>
         <div id="covar-heatmap-graph" style="width:100%;height:750px;"></div>
         <script>
 var heatmap_data = {{ data.charts.covar_heatmap|tojson }}
