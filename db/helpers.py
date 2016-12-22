@@ -119,7 +119,12 @@ def read_mongodb_matrix(tickers, matrix_name):
                              matrix_name = matrix_name)
     n = len(tickers)
     available_tickers = set([mi.i for mi in mis])
-    matrix = pd.DataFrame(np.absolute(np.random.normal(0, 0.001, [n, n])),
+    a = np.absolute(np.random.normal(0, 0.001, [n, n]))
+    a_triu = np.triu(a, k=0)
+    a_tril = np.tril(a, k=0)
+    a_diag = np.diag(np.diag(a))
+    a_sym_triu = a_triu + a_triu.T - a_diag
+    matrix = pd.DataFrame(a_sym_triu,
                           index = tickers,
                           columns = tickers)
     for mi in mis:
