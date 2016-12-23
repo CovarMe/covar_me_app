@@ -1,3 +1,6 @@
+# this prepares all the chart data in the format required for the
+# front-end javascript charting libraries
+
 import math
 import random
 import datetime
