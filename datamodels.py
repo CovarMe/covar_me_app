@@ -1,3 +1,6 @@
+# datamodels retrieve or transform the data for it to be in a desirable format
+# for whatever needs to be displayed on a page
+
 import numpy as np
 import pandas as pd
 from db.helpers import *
@@ -5,6 +8,7 @@ from calculations import *
 from pprint import pprint
 
 
+# returns the timeseries for the desired tickers in dataframe format
 def returns_as_dataframe(tickers, since = '1y-ago'):
     db_res = opentsdb_query(tickers,
                             ['return'],
@@ -38,14 +42,15 @@ def matrix_greedy_heatmap_sorted(data):
     return data.loc[order, order]
 
 
+# calculates the optimal weights at different desired returns and puts return agains variance
 def ret_vs_var_data_model(covar, returns):
     breaks = 100
     means = calculate_mean_vector(returns) * 100
     data = [(0,0)] * breaks
     for i in range(breaks):
-        q = float(i) / breaks * 100
-        weights = calculate_wolf_weights(covar*10000, means, q)
-        var = np.absolute(np.dot(np.dot(weights.transpose(), covar*10000), weights))
+        q = float(i) / breaks * 1000
+        weights = calculate_wolf_weights(covar * 10000, means, q)
+        var = np.absolute(np.dot(np.dot(weights.transpose(), covar * 10000), weights))
         data[i] = {'ret': q/100, 
                    'var': var/10000, 
                    'weights': weights,

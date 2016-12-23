@@ -1,3 +1,6 @@
+# this file contains all controller functions that are called on the different
+# routes in cvapp
+
 import timeit
 import string
 from flask import render_template, flash
@@ -124,6 +127,10 @@ def show_database_stats():
                            tickers_total = tickers_total,
                            matrix_items_stored = matrix_items_stored,
                            total_dps = total_dps)
+
+
+def show_tutorial_page():
+    return render_template('tutorial.html')
 
 
 def matrix_test():

@@ -90,6 +90,11 @@ def database():
     return show_database_stats()
 
 
+@app.route('/video')
+def video():
+    return show_tutorial_page()
+
+
 @app.route('/test')
 def test():
     return matrix_test()

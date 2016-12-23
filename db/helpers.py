@@ -1,3 +1,6 @@
+# this is where all the database access scripts are
+# every database access in the program uses some function from this file
+
 import os, requests, json, time, datetime, math, re
 import numpy as np
 import pandas as pd

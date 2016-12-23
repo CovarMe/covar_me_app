@@ -1,5 +1,6 @@
 # script that checks the status of the database and stores stats on it
 
+import time
 import threading
 from db.helpers import *
 
@@ -13,6 +14,7 @@ def update_stats():
     tickers = get_ticker_list(filtered = False)
     for ticker in tickers:
         status = {}
+        status['dps'] = 0
         db_res = opentsdb_query([ticker], ['return'], '5y-ago')
         if db_res['success']:
             metric = db_res['data'][0]
@@ -39,3 +41,4 @@ def update_stats():
         update_stock_status(ticker, status)
         print(ticker)
         print(status)
+        time.sleep(0.5)
