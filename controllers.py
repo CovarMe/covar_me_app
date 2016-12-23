@@ -126,7 +126,6 @@ def show_database_stats():
                            total_dps = total_dps)
 
 
-# TODO
 def matrix_test():
     start = time.clock()
     mtcars = std_data('mtcars')
