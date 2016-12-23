@@ -21,7 +21,7 @@
     <!-- Return vs. Variance curve -->
     <div class="row padding-bottom">
       <div class="column_10 offset_1">
-        <h2>Return vs. Risk</h2>
+        <h2>Daily Return vs. Risk</h2>
         <div id="ret-vs-var-graph" style="width:100%;height:550px;"></div>
         <script>
 var ret_vs_var_chart_data = {{ data.charts.ret_vs_var|tojson }}
@@ -29,7 +29,7 @@ var layout = {
   paper_bgcolor: "rgb(255,255,255)", 
   plot_bgcolor: "rgb(229,229,229)", 
   xaxis: {
-    title: 'Associated Risk',
+    title: 'Associated Variance',
     gridcolor: "rgb(255,255,255)", 
     autorange: true,
     showgrid: true, 
@@ -40,9 +40,9 @@ var layout = {
     zeroline: true
   }, 
   yaxis: {
-    title: 'Expected Return',
+    title: 'Expected Return in Percentage Points',
     gridcolor: "rgb(255,255,255)", 
-    range: [0, 100], 
+    range: [0, 1], 
     showgrid: true, 
     showline: false, 
     showticklabels: true, 
