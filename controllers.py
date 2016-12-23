@@ -118,10 +118,12 @@ def show_database_stats():
     tickers_available = len(get_ticker_list())
     tickers_total = len(get_ticker_list(filtered = False))
     matrix_items_stored = get_matrix_size('covariance')
+    total_dps = get_dps_total()
     return render_template('database.html',
                            tickers_available = tickers_available,
                            tickers_total = tickers_total,
-                           matrix_items_stored = matrix_items_stored)
+                           matrix_items_stored = matrix_items_stored,
+                           total_dps = total_dps)
 
 
 # TODO

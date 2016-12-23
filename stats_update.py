@@ -1,3 +1,5 @@
+# script that checks the status of the database and stores stats on it
+
 import threading
 from db.helpers import *
 

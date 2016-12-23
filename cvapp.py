@@ -26,7 +26,7 @@ connect(host='mongodb://' + os.environ.get('MONGO_HOST') + '/' + os.environ.get(
 from controllers import *
 from stats_update import *
 
-# background_update_stats()
+background_update_stats()
 
 
 @app.route('/')
@@ -93,7 +93,3 @@ def database():
 @app.route('/test')
 def test():
     return matrix_test()
-
-
-# start application
-# app.run(host = '127.0.0.1', port = 5000)

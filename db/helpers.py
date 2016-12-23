@@ -119,20 +119,26 @@ def create_mongodb_matrix(mat, tickers, matrix_name):
 
 
 def read_mongodb_matrix(tickers, matrix_name):
-  mis = MatrixItem.objects(i__in = tickers,
-                           j__in = tickers,
-                           matrix_name = matrix_name)
-  n = len(tickers)
-  available_tickers = set([mi.i for mi in mis])
-  matrix = pd.DataFrame(np.absolute(np.random.normal(0, 0.001, [n, n])),
-                        index = tickers,
-                        columns = tickers)
-  for mi in mis:
-    if abs(mi.v) > 10:
-      mi.v = abs(np.random.normal(0,0.001))
+    mis = MatrixItem.objects(i__in = tickers,
+                             j__in = tickers,
+                             matrix_name = matrix_name)
+    n = len(tickers)
+    available_tickers = set([mi.i for mi in mis])
+    np.random.seed(n)
+    a = np.absolute(np.random.normal(0, 0.001, [n, n]))
+    a_triu = np.triu(a, k=0)
+    a_tril = np.tril(a, k=0)
+    a_diag = np.diag(np.diag(a))
+    a_sym_triu = a_triu + a_triu.T - a_diag
+    matrix = pd.DataFrame(a_sym_triu,
+                          index = tickers,
+                          columns = tickers)
+    for mi in mis:
+        if abs(mi.v) > 10:
+            mi.v = 0.001
 
-      matrix.set_value(mi.i, mi.j, mi.v)
-      matrix.set_value(mi.j, mi.i, mi.v)
+        matrix.set_value(mi.i, mi.j, mi.v)
+        matrix.set_value(mi.j, mi.i, mi.v)
 
     matrix = matrix.round(6)
     return matrix
@@ -149,4 +155,8 @@ def update_stock_status(ticker, status):
 
 def get_matrix_size(matrix_name):
   nitems = MatrixItem.objects(matrix_name = matrix_name).count()
+  return nitems * 2
+
+def get_dps_total():
+  nitems = int(Stock.objects.sum('dps'))
   return nitems * 2
